@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>about-bowxlss</title>
     <style>
-
         body {
             font-family: 'Courier New', monospace;
             margin: 0;
@@ -20,7 +19,6 @@
             font-weight: 600;
             text-shadow: 0 0 6px rgba(0,0,0,0.9);
         }
-
         body::before {
             content: "";
             position: fixed;
@@ -31,11 +29,7 @@
             background: rgba(0,0,0,0.65);
             z-index: -1;
         }
-
-        .header {
-            padding: 60px 20px;
-        }
-
+        .header { padding: 60px 20px; }
         h1 {
             font-size: 3em;
             letter-spacing: 3px;
@@ -43,14 +37,12 @@
             text-shadow: 0 0 12px #8d00b3;
             font-weight: 900;
         }
-
         .container {
             max-width: 800px;
             margin: auto;
             padding: 20px;
             font-size: 1.1em;
         }
-
         .section-box {
             margin-top: 40px;
             padding: 20px;
@@ -60,26 +52,26 @@
             color: #f0f0f0;
             text-shadow: 0 0 6px #ff00ff, 0 0 12px #ff00ff, 0 0 18px #ff00ff;
         }
-
         .section-box h2 {
             font-size: 2em;
             margin-bottom: 15px;
         }
-
+        .section-box h2 span {
+            display: inline-block;
+            animation: floatEmoji 2s infinite alternate;
+        }
         .section-box p {
             font-weight: 700;
             text-shadow: 0 0 4px black;
             line-height: 1.6;
         }
-
         .social-container {
-            margin-top: 40px;
+            margin-top: 20px;
             display: flex;
             flex-direction: column;
             gap: 15px;
             align-items: center;
         }
-
         .social-btn {
             display: flex;
             align-items: center;
@@ -98,28 +90,46 @@
             cursor: default;
             transition: background 0.2s ease;
         }
-
-        .social-btn:hover {
-            background: rgba(255, 255, 255, 0.22);
-        }
-
+        .social-btn:hover { background: rgba(255, 255, 255, 0.22); }
         .social-btn img {
             width: 22px;
             height: 22px;
             filter: brightness(95%);
         }
-
+        .social-title {
+            font-size: 2em;
+            color: #ff75ff;
+            text-shadow: 0 0 8px #ff00ff, 0 0 15px #ff00ff, 0 0 25px #ff00ff;
+            margin-top: 5vw;
+            margin-bottom: 15px;
+            animation: flickerGlow 1.5s infinite alternate;
+        }
+        .social-title span {
+            display: inline-block;
+            animation: floatEmoji 2s infinite alternate;
+        }
+        @keyframes flickerGlow {
+            0% { text-shadow: 0 0 6px #ff00ff, 0 0 12px #ff00ff, 0 0 18px #ff00ff; }
+            25% { text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #ff00ff; }
+            50% { text-shadow: 0 0 8px #ff00ff, 0 0 16px #ff00ff, 0 0 24px #ff00ff; }
+            75% { text-shadow: 0 0 12px #ff00ff, 0 0 24px #ff00ff, 0 0 36px #ff00ff; }
+            100% { text-shadow: 0 0 8px #ff00ff, 0 0 16px #ff00ff, 0 0 24px #ff00ff; }
+        }
         .anime-img {
-            width: 100%;
-            max-width: 320px;
+            width: 180px;
+            height: 180px;
             margin: auto;
             display: block;
-            border-radius: 10px;
-            box-shadow: 0 0 20px #450063;
+            border-radius: 50%;
+            box-shadow: 0 0 20px #450063, 0 0 40px #ff00ff, 0 0 60px #ff00ff;
+            animation: neonGlow 2.5s infinite alternate;
             margin-top: 20px;
         }
-
-        /* footer baru dengan efek glow */
+        @keyframes neonGlow {
+            0% { box-shadow: 0 0 20px #450063, 0 0 40px #ff00ff, 0 0 60px #ff00ff; transform: scale(1); }
+            50% { box-shadow: 0 0 30px #450063, 0 0 50px #ff00ff, 0 0 80px #ff00ff; transform: scale(1.05); }
+            100% { box-shadow: 0 0 20px #450063, 0 0 40px #ff00ff, 0 0 60px #ff00ff; transform: scale(1); }
+        }
         .footer {
             margin-top: 50px;
             padding: 20px 10px;
@@ -131,31 +141,19 @@
             align-items: center;
             gap: 8px;
         }
-
-        .footer span {
-            display: inline-block;
-            animation: float 2s infinite alternate;
-        }
-
+        .footer span { display: inline-block; animation: float 2s infinite alternate; }
         @keyframes float {
             0% { transform: translateY(0); }
             50% { transform: translateY(-4px); }
             100% { transform: translateY(0); }
         }
-
-        .footer-icons {
-            display: flex;
-            gap: 12px;
-        }
-
+        .footer-icons { display: flex; gap: 12px; }
         .footer-icons img {
             width: 20px;
             height: 20px;
             filter: drop-shadow(0 0 3px #ff00ff);
             animation: float 2s infinite alternate;
         }
-
-        /* Hobbies & Interests dengan neon glow dan emoji animasi */
         .hobbies {
             margin-top: 40px;
             padding: 20px;
@@ -163,21 +161,22 @@
             border-radius: 10px;
             box-shadow: 0 0 20px #8d00b3;
         }
-
         .hobbies h2 {
             font-size: 2em;
             color: #ff75ff;
             text-shadow: 0 0 8px #ff00ff, 0 0 15px #ff00ff, 0 0 25px #ff00ff;
             margin-bottom: 15px;
         }
-
+        .hobbies h2 span {
+            display: inline-block;
+            animation: floatEmoji 2s infinite alternate;
+        }
         .hobbies ul {
             list-style: none;
             padding: 0;
             margin: 0;
             font-size: 1.1em;
         }
-
         .hobbies ul li {
             margin: 8px 0;
             color: #f0f0f0;
@@ -188,92 +187,76 @@
             justify-content: center;
             gap: 8px;
         }
-
         .hobbies ul li:hover {
             text-shadow: 0 0 8px #ff00ff, 0 0 16px #ff00ff, 0 0 32px #ff00ff;
             transform: scale(1.05);
         }
-
-        .hobbies ul li span,
-        .section-box h2 span {
+        .hobbies ul li span {
             display: inline-block;
             animation: floatEmoji 2s infinite alternate;
         }
-
         @keyframes floatEmoji {
             0% { transform: translateY(0); }
             50% { transform: translateY(-6px); }
             100% { transform: translateY(0); }
         }
-
+        @media (max-width: 600px) {
+            .social-title { font-size: 1.6em; margin-top: 8vw; }
+            .section-box h2, .hobbies h2 { font-size: 1.6em; }
+            .hobbies ul li, .social-btn { font-size: 1em; }
+            .anime-img { width: 140px; height: 140px; }
+        }
     </style>
 </head>
 <body>
-
     <div class="header">
         <h1>bowxlss</h1>
         <img src="img.jpg" class="anime-img">
     </div>
-
     <div class="container">
-
         <div class="section-box">
-            <h2>🎤 <span>About Me</span></h2>
+            <h2><span>🎤 About Me</span></h2>
             <p>
             Yo! Gue Bow, gamer santai yang main buat chill, bukan ngejar kompetitif. Game buat gue itu tempat buat lepas stress, have fun, and just enjoy the moment tanpa drama dan pressure.<br><br>
-            Di luar itu, gue juga lagi exploring coding dan web dev. Ini first personal website project gue, yang gue bangun sendiri with a little help from AI 😁. Welcome to my space — just vibe, relax, and enjoy the ride ✨
+            Di luar itu, gue juga lagi exploring coding dan web dev. Ini first personal website project gue, yang gue bangun sendiri with a little help from AI. Welcome to my space — just vibe, relax, and enjoy the ride ✨
             </p>
         </div>
-
         <div class="hobbies">
-            <h2>🎮 <span>Hobbies & Interests ✨</span></h2>
+            <h2><span>🎮 Hobbies & Interests ✨</span></h2>
             <ul>
-                <li><span>🎲</span> Gaming & Chill Sessions</li>
-                <li><span>💻</span> Web Development & Coding</li>
-                <li><span>📺</span> Watching Anime & Series</li>
-                <li><span>🎵</span> Music & Chill Beats</li>
-                <li><span>🛠️</span> Exploring Tech & Gadgets</li>
+                <li>🎲 Gaming & Chill Sessions</li>
+                <li>💻 Web Development & Coding</li>
+                <li>📺 Watching Anime & Series</li>
+                <li>🎵 Music & Chill Beats</li>
+                <li>🛠️ Exploring Tech & Gadgets</li>
             </ul>
         </div>
-
+        <div class="social-title"><span>📱 Social Media</span></div>
         <div class="social-container">
-
             <a class="social-btn" href="https://instagram.com/bowxlss_" target="_blank">
-                <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png">
-                Instagram
+                <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png"> Instagram
             </a>
-
             <a class="social-btn" href="https://tiktok.com/@bowxlss_" target="_blank">
-                <img src="https://cdn-icons-png.flaticon.com/512/3046/3046122.png">
-                TikTok
+                <img src="https://cdn-icons-png.flaticon.com/512/3046/3046122.png"> TikTok
             </a>
-
             <a class="social-btn" href="https://t.me/bowxlss" target="_blank">
-                <img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png">
-                Telegram
+                <img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png"> Telegram
             </a>
-
             <a class="social-btn" href="https://github.com/bowxlss" target="_blank">
-                <img src="https://cdn-icons-png.flaticon.com/512/733/733553.png">
-                GitHub
+                <img src="https://cdn-icons-png.flaticon.com/512/733/733553.png"> GitHub
             </a>
-
             <a class="social-btn" href="https://discord.com/users/bowxlss" target="_blank">
-                <img src="https://cdn-icons-png.flaticon.com/512/3670/3670157.png">
-                Discord
+                <img src="https://cdn-icons-png.flaticon.com/512/3670/3670157.png"> Discord
             </a>
-
         </div>
     </div>
-
     <div class="footer">
-        <span>Created by bowxlss ✨</span>
+        <span>© 2025 Bowxlss. All rights reserved. ✨</span>
         <div class="footer-icons">
             <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
             <img src="https://cdn-icons-png.flaticon.com/512/3046/3046122.png" alt="TikTok">
             <img src="https://cdn-icons-png.flaticon.com/512/733/733553.png" alt="GitHub">
         </div>
     </div>
-
 </body>
 </html>
