@@ -43,7 +43,12 @@
         .skill-bar{width:100%;height:18px;background:rgba(30,30,30,.55);border-radius:12px;overflow:hidden;box-shadow:0 0 6px #ff00ff inset, 0 0 12px #ff00ff inset}
         .skill-fill{height:100%;background:linear-gradient(90deg,#ff00ff,#ff75ff);width:0;border-radius:12px;box-shadow:0 0 12px #ff00ff, 0 0 20px #ff75ff;animation: fillSkill 1.5s forwards}
         @keyframes fillSkill{from {width:0;} to {width:var(--skill-width);}}
-        @media(max-width:600px){.section-box h2{font-size:1.6em}}
+        /* Fix Highlights for mobile */
+        .project-list{overflow:visible !important;}
+        @media(max-width:600px){
+            .section-box h2{font-size:1.6em}
+            .project-list{padding-left:15px;margin-top:10px;}
+        }
     </style>
 </head>
 <body>
@@ -131,7 +136,7 @@
         <!-- Highlights Section -->
         <div class="section-box" data-aos="fade-up">
             <h2><span>🏆 Highlights & Achievements</span></h2>
-            <ul class="project-list" style="text-align:left; padding-left:20px; margin-top:10px;">
+            <ul class="project-list" style="text-align:left; padding-left:20px; margin-top:10px; overflow:visible !important;">
                 <li>Started learning web dev & deployed projects on GitHub Pages.</li>
                 <li>Focused on chill gaming lifestyle & stress-free learning.</li>
                 <li>Experimented with AI tools to create websites & scripts.</li>
