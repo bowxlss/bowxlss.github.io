@@ -49,9 +49,27 @@
             margin: auto;
             padding: 20px;
             font-size: 1.1em;
+        }
+
+        .section-box {
+            margin-top: 40px;
+            padding: 20px;
+            background: rgba(30,30,30,0.55);
+            border-radius: 10px;
+            box-shadow: 0 0 20px #8d00b3;
             color: #f0f0f0;
-            text-shadow: 0 0 8px black;
+            text-shadow: 0 0 6px #ff00ff, 0 0 12px #ff00ff, 0 0 18px #ff00ff;
+        }
+
+        .section-box h2 {
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
+
+        .section-box p {
             font-weight: 700;
+            text-shadow: 0 0 4px black;
+            line-height: 1.6;
         }
 
         .social-container {
@@ -137,6 +155,57 @@
             animation: float 2s infinite alternate;
         }
 
+        /* Hobbies & Interests dengan neon glow dan emoji animasi */
+        .hobbies {
+            margin-top: 40px;
+            padding: 20px;
+            background: rgba(30,30,30,0.55);
+            border-radius: 10px;
+            box-shadow: 0 0 20px #8d00b3;
+        }
+
+        .hobbies h2 {
+            font-size: 2em;
+            color: #ff75ff;
+            text-shadow: 0 0 8px #ff00ff, 0 0 15px #ff00ff, 0 0 25px #ff00ff;
+            margin-bottom: 15px;
+        }
+
+        .hobbies ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            font-size: 1.1em;
+        }
+
+        .hobbies ul li {
+            margin: 8px 0;
+            color: #f0f0f0;
+            text-shadow: 0 0 4px #ff00ff, 0 0 10px #ff00ff, 0 0 20px #ff00ff;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .hobbies ul li:hover {
+            text-shadow: 0 0 8px #ff00ff, 0 0 16px #ff00ff, 0 0 32px #ff00ff;
+            transform: scale(1.05);
+        }
+
+        .hobbies ul li span,
+        .section-box h2 span {
+            display: inline-block;
+            animation: floatEmoji 2s infinite alternate;
+        }
+
+        @keyframes floatEmoji {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+            100% { transform: translateY(0); }
+        }
+
     </style>
 </head>
 <body>
@@ -147,10 +216,25 @@
     </div>
 
     <div class="container">
-        <p>
-        Yo! Gue Bow, gamer santai yang main buat chill, bukan ngejar kompetitif. Game buat gue itu tempat buat lepas stress, have fun, and just enjoy the moment tanpa drama dan pressure.<br><br>
-        Di luar itu, gue juga lagi exploring coding dan web dev. Ini first personal website project gue, yang gue bangun sendiri with a little help from AI 😁. Welcome to my space — just vibe, relax, and enjoy the ride ✨
-        </p>
+
+        <div class="section-box">
+            <h2>🎤 <span>About Me</span></h2>
+            <p>
+            Yo! Gue Bow, gamer santai yang main buat chill, bukan ngejar kompetitif. Game buat gue itu tempat buat lepas stress, have fun, and just enjoy the moment tanpa drama dan pressure.<br><br>
+            Di luar itu, gue juga lagi exploring coding dan web dev. Ini first personal website project gue, yang gue bangun sendiri with a little help from AI 😁. Welcome to my space — just vibe, relax, and enjoy the ride ✨
+            </p>
+        </div>
+
+        <div class="hobbies">
+            <h2>🎮 <span>Hobbies & Interests ✨</span></h2>
+            <ul>
+                <li><span>🎲</span> Gaming & Chill Sessions</li>
+                <li><span>💻</span> Web Development & Coding</li>
+                <li><span>📺</span> Watching Anime & Series</li>
+                <li><span>🎵</span> Music & Chill Beats</li>
+                <li><span>🛠️</span> Exploring Tech & Gadgets</li>
+            </ul>
+        </div>
 
         <div class="social-container">
 
