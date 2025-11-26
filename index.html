@@ -4,20 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>about-bowxlss</title>
+    <!-- AOS CSS for scroll reveal -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
     <style>
+        /* ========================= */
+        /* Dark / Light Mode Variables */
+        /* ========================= */
+        :root {
+            --bg-color: #0d0d0d;
+            --overlay-color: rgba(0,0,0,0.65);
+            --text-color: #e5e5e5;
+            --tag-bg: rgba(30,30,30,0.55);
+            --tag-color: #ff75ff;
+            --section-bg: rgba(30,30,30,0.55);
+            --box-shadow-color: #8d00b3;
+            --glow-color: #ff00ff;
+        }
+        body.light {
+            --bg-color: #f0f0f0;
+            --overlay-color: rgba(255,255,255,0.6);
+            --text-color: #222222;
+            --tag-bg: rgba(220,220,220,0.7);
+            --tag-color: #8a00ff;
+            --section-bg: rgba(240,240,240,0.7);
+            --box-shadow-color: #450063;
+            --glow-color: #8a00ff;
+        }
+
+        /* ========================= */
+        /* General Body */
+        /* ========================= */
         body {
             font-family: 'Courier New', monospace;
             margin: 0;
             padding: 0;
-            background: url('bg.jpg');
+            background: var(--bg-color) url('bg.jpg') no-repeat center fixed;
             background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            color: #e5e5e5;
+            color: var(--text-color);
             text-align: center;
             font-weight: 600;
             text-shadow: 0 0 6px rgba(0,0,0,0.9);
+            scroll-behavior: smooth;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
         body::before {
             content: "";
@@ -26,9 +54,23 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.65);
+            background: var(--overlay-color);
             z-index: -1;
         }
+
+        /* ========================= */
+        /* Neon Particle Background */
+        /* ========================= */
+        #particles-js {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: -2;
+        }
+
+        /* ========================= */
+        /* Header */
+        /* ========================= */
         .header { padding: 60px 20px; }
         h1 {
             font-size: 3em;
@@ -47,26 +89,35 @@
         .tag {
             padding: 6px 14px;
             border-radius: 20px;
-            background: rgba(30,30,30,0.55);
-            color: #ff75ff;
+            background: var(--tag-bg);
+            color: var(--tag-color);
             font-weight: 700;
             font-size: 0.9em;
-            text-shadow: 0 0 6px #ff00ff, 0 0 12px #ff00ff;
+            text-shadow: 0 0 6px var(--glow-color), 0 0 12px var(--glow-color);
+            transition: transform 0.3s, box-shadow 0.3s;
         }
-        .container {
-            max-width: 800px;
-            margin: auto;
-            padding: 20px;
-            font-size: 1.1em;
+        .tag:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 12px var(--glow-color), 0 0 24px var(--glow-color);
         }
+
+        /* ========================= */
+        /* Container & Sections */
+        /* ========================= */
+        .container { max-width: 800px; margin: auto; padding: 20px; font-size: 1.1em; }
         .section-box {
             margin-top: 40px;
             padding: 20px;
-            background: rgba(30,30,30,0.55);
+            background: var(--section-bg);
             border-radius: 10px;
-            box-shadow: 0 0 20px #8d00b3;
-            color: #f0f0f0;
-            text-shadow: 0 0 6px #ff00ff, 0 0 12px #ff00ff, 0 0 18px #ff00ff;
+            box-shadow: 0 0 20px var(--box-shadow-color);
+            color: var(--text-color);
+            text-shadow: 0 0 6px var(--glow-color), 0 0 12px var(--glow-color), 0 0 18px var(--glow-color);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .section-box:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 0 25px var(--glow-color), 0 0 40px var(--glow-color);
         }
         .section-box h2 {
             font-size: 2em;
@@ -81,6 +132,10 @@
             text-shadow: 0 0 4px black;
             line-height: 1.6;
         }
+
+        /* ========================= */
+        /* Social Buttons */
+        /* ========================= */
         .social-container {
             margin-top: 20px;
             display: flex;
@@ -95,18 +150,21 @@
             gap: 12px;
             width: 260px;
             padding: 14px;
-            background: rgba(30, 30, 30, 0.55);
+            background: var(--section-bg);
             border-radius: 6px;
             border: 1px solid rgba(255, 255, 255, 0.12);
             text-decoration: none;
-            color: #ffffff;
+            color: var(--text-color);
             font-size: 1.1em;
             font-weight: 700;
             text-shadow: 0 0 7px black;
-            cursor: default;
-            transition: background 0.2s ease;
+            transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
         }
-        .social-btn:hover { background: rgba(255, 255, 255, 0.22); }
+        .social-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px var(--glow-color), 0 0 40px var(--glow-color);
+            background: rgba(50, 0, 50, 0.6);
+        }
         .social-btn img {
             width: 22px;
             height: 22px;
@@ -115,7 +173,7 @@
         .social-title {
             font-size: 2em;
             color: #ff75ff;
-            text-shadow: 0 0 8px #ff00ff, 0 0 15px #ff00ff, 0 0 25px #ff00ff;
+            text-shadow: 0 0 8px var(--glow-color), 0 0 15px var(--glow-color), 0 0 25px var(--glow-color);
             margin-top: 5vw;
             margin-bottom: 15px;
             animation: flickerGlow 1.5s infinite alternate;
@@ -124,79 +182,66 @@
             display: inline-block;
             animation: floatEmoji 2s infinite alternate;
         }
-        @keyframes flickerGlow {
-            0% { text-shadow: 0 0 6px #ff00ff, 0 0 12px #ff00ff, 0 0 18px #ff00ff; }
-            25% { text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #ff00ff; }
-            50% { text-shadow: 0 0 8px #ff00ff, 0 0 16px #ff00ff, 0 0 24px #ff00ff; }
-            75% { text-shadow: 0 0 12px #ff00ff, 0 0 24px #ff00ff, 0 0 36px #ff00ff; }
-            100% { text-shadow: 0 0 8px #ff00ff, 0 0 16px #ff00ff, 0 0 24px #ff00ff; }
-        }
+
+        /* ========================= */
+        /* Anime Image */
+        /* ========================= */
         .anime-img {
             width: 180px;
             height: 180px;
             margin: auto;
             display: block;
             border-radius: 50%;
-            box-shadow: 0 0 20px #450063, 0 0 40px #ff00ff, 0 0 60px #ff00ff;
+            box-shadow: 0 0 20px #450063, 0 0 40px var(--glow-color), 0 0 60px var(--glow-color);
             animation: neonGlow 2.5s infinite alternate;
             margin-top: 20px;
         }
-        @keyframes neonGlow {
-            0% { box-shadow: 0 0 20px #450063, 0 0 40px #ff00ff, 0 0 60px #ff00ff; transform: scale(1); }
-            50% { box-shadow: 0 0 30px #450063, 0 0 50px #ff00ff, 0 0 80px #ff00ff; transform: scale(1.05); }
-            100% { box-shadow: 0 0 20px #450063, 0 0 40px #ff00ff, 0 0 60px #ff00ff; transform: scale(1); }
-        }
+
+        /* ========================= */
+        /* Footer */
+        /* ========================= */
         .footer {
             margin-top: 50px;
             padding: 20px 10px;
             font-size: 1em;
-            color: #ff75ff;
-            text-shadow: 0 0 6px #ff00ff, 0 0 12px #ff00ff, 0 0 18px #ff00ff;
+            color: var(--tag-color);
+            text-shadow: 0 0 6px var(--glow-color), 0 0 12px var(--glow-color), 0 0 18px var(--glow-color);
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 8px;
         }
         .footer span { display: inline-block; animation: float 2s infinite alternate; }
-        @keyframes float {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(-4px); }
-            100% { transform: translateY(0); }
-        }
         .footer-icons { display: flex; gap: 12px; }
         .footer-icons img {
             width: 20px;
             height: 20px;
-            filter: drop-shadow(0 0 3px #ff00ff);
+            filter: drop-shadow(0 0 3px var(--glow-color));
             animation: float 2s infinite alternate;
         }
+
+        /* ========================= */
+        /* Hobbies */
+        /* ========================= */
         .hobbies {
             margin-top: 40px;
             padding: 20px;
-            background: rgba(30,30,30,0.55);
+            background: var(--section-bg);
             border-radius: 10px;
-            box-shadow: 0 0 20px #8d00b3;
+            box-shadow: 0 0 20px var(--box-shadow-color);
         }
         .hobbies h2 {
             font-size: 2em;
-            color: #ff75ff;
-            text-shadow: 0 0 8px #ff00ff, 0 0 15px #ff00ff, 0 0 25px #ff00ff;
+            color: var(--tag-color);
+            text-shadow: 0 0 8px var(--glow-color), 0 0 15px var(--glow-color), 0 0 25px var(--glow-color);
             margin-bottom: 15px;
         }
-        .hobbies h2 span {
-            display: inline-block;
-            animation: floatEmoji 2s infinite alternate;
-        }
-        .hobbies ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            font-size: 1.1em;
-        }
+        .hobbies h2 span { display: inline-block; animation: floatEmoji 2s infinite alternate; }
+        .hobbies ul { list-style: none; padding: 0; margin: 0; font-size: 1.1em; }
         .hobbies ul li {
             margin: 8px 0;
-            color: #f0f0f0;
-            text-shadow: 0 0 4px #ff00ff, 0 0 10px #ff00ff, 0 0 20px #ff00ff;
+            color: var(--text-color);
+            text-shadow: 0 0 4px var(--glow-color), 0 0 10px var(--glow-color), 0 0 20px var(--glow-color);
             transition: 0.3s;
             display: flex;
             align-items: center;
@@ -204,18 +249,39 @@
             gap: 8px;
         }
         .hobbies ul li:hover {
-            text-shadow: 0 0 8px #ff00ff, 0 0 16px #ff00ff, 0 0 32px #ff00ff;
             transform: scale(1.05);
+            text-shadow: 0 0 8px var(--glow-color), 0 0 16px var(--glow-color), 0 0 32px var(--glow-color);
         }
-        .hobbies ul li span {
-            display: inline-block;
-            animation: floatEmoji 2s infinite alternate;
+
+        /* ========================= */
+        /* Animations */
+        /* ========================= */
+        @keyframes flickerGlow { 
+            0% { text-shadow: 0 0 6px var(--glow-color),0 0 12px var(--glow-color),0 0 18px var(--glow-color); }
+            25% { text-shadow: 0 0 10px var(--glow-color),0 0 20px var(--glow-color),0 0 30px var(--glow-color); }
+            50% { text-shadow: 0 0 8px var(--glow-color),0 0 16px var(--glow-color),0 0 24px var(--glow-color); }
+            75% { text-shadow: 0 0 12px var(--glow-color),0 0 24px var(--glow-color),0 0 36px var(--glow-color); }
+            100% { text-shadow: 0 0 8px var(--glow-color),0 0 16px var(--glow-color),0 0 24px var(--glow-color); }
         }
-        @keyframes floatEmoji {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(-6px); }
-            100% { transform: translateY(0); }
+        @keyframes neonGlow {
+            0% { box-shadow: 0 0 20px #450063,0 0 40px var(--glow-color),0 0 60px var(--glow-color); transform: scale(1); }
+            50% { box-shadow: 0 0 30px #450063,0 0 50px var(--glow-color),0 0 80px var(--glow-color); transform: scale(1.05); }
+            100% { box-shadow: 0 0 20px #450063,0 0 40px var(--glow-color),0 0 60px var(--glow-color); transform: scale(1); }
         }
+        @keyframes floatEmoji { 0%{transform:translateY(0);}50%{transform:translateY(-6px);}100%{transform:translateY(0);} }
+        @keyframes float { 0%{transform:translateY(0);}50%{transform:translateY(-4px);}100%{transform:translateY(0);} }
+
+        /* ========================= */
+        /* Fancy Scrollbar */
+        /* ========================= */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: var(--bg-color); }
+        ::-webkit-scrollbar-thumb { background: var(--glow-color); border-radius: 5px; }
+        ::-webkit-scrollbar-thumb:hover { background: #ff99ff; }
+
+        /* ========================= */
+        /* Media Queries */
+        /* ========================= */
         @media (max-width: 600px) {
             .social-title { font-size: 1.6em; margin-top: 8vw; }
             .section-box h2, .hobbies h2 { font-size: 1.6em; }
@@ -225,10 +291,15 @@
     </style>
 </head>
 <body>
+    <!-- Particle Background -->
+    <div id="particles-js"></div>
+
+    <!-- Dark Mode Toggle -->
+    <button id="theme-toggle" style="position:fixed;top:15px;right:15px;z-index:10;padding:10px 15px;border:none;border-radius:6px;background:var(--section-bg);color:var(--text-color);cursor:pointer;">Toggle Theme</button>
+
     <div class="header">
         <h1>bowxlss</h1>
         <img src="img.jpg" class="anime-img">
-        <!-- Tags -->
         <div class="tags-container">
             <div class="tag">Gamer</div>
             <div class="tag">Chill Vibes</div>
@@ -237,14 +308,14 @@
         </div>
     </div>
     <div class="container">
-        <div class="section-box">
+        <div class="section-box" data-aos="fade-up">
             <h2><span>🎤 About Me</span></h2>
             <p>
             Yo! Gue Bow, gamer santai yang main buat chill, bukan ngejar kompetitif. Game buat gue itu tempat buat lepas stress, have fun, and just enjoy the moment tanpa drama dan pressure.<br><br>
             Di luar itu, gue juga lagi exploring coding dan web dev. Ini first personal website project gue, yang gue bangun sendiri with a little help from AI. Welcome to my space — just vibe, relax, and enjoy the ride ✨
             </p>
         </div>
-        <div class="hobbies">
+        <div class="hobbies" data-aos="fade-up">
             <h2><span>🎮 Hobbies & Interests ✨</span></h2>
             <ul>
                 <li>🎲 Gaming & Chill Sessions</li>
@@ -254,8 +325,8 @@
                 <li>🛠️ Exploring Tech & Gadgets</li>
             </ul>
         </div>
-        <div class="social-title"><span>📱 Social Media</span></div>
-        <div class="social-container">
+        <div class="social-title" data-aos="fade-up"><span>📱 Social Media</span></div>
+        <div class="social-container" data-aos="fade-up">
             <a class="social-btn" href="https://instagram.com/bowxlss_" target="_blank">
                 <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png"> Instagram
             </a>
@@ -273,7 +344,7 @@
             </a>
         </div>
     </div>
-    <div class="footer">
+    <div class="footer" data-aos="fade-up">
         <span>© 2025 Bowxlss. All rights reserved. ✨</span>
         <div class="footer-icons">
             <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
@@ -281,5 +352,32 @@
             <img src="https://cdn-icons-png.flaticon.com/512/733/733553.png" alt="GitHub">
         </div>
     </div>
+
+    <!-- JS Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({ duration: 800, once: true });
+
+        // Initialize particles.js
+        particlesJS('particles-js', {
+          "particles": {
+            "number": { "value": 60 },
+            "color": { "value": "#ff00ff" },
+            "shape": { "type": "circle" },
+            "opacity": { "value": 0.6, "random": true },
+            "size": { "value": 2, "random": true },
+            "line_linked": { "enable": false },
+            "move": { "enable": true, "speed": 0.4 }
+          }
+        });
+
+        // Dark Mode Toggle
+        const toggle = document.getElementById('theme-toggle');
+        toggle.addEventListener('click', () => {
+            document.body.classList.toggle('light');
+        });
+    </script>
 </body>
 </html>
