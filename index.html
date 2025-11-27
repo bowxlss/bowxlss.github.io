@@ -11,6 +11,56 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
     <!-- External CSS -->
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Typing Animation Styles */
+        .typing-container {
+            position: relative;
+            text-align: left;
+            min-height: 180px;
+        }
+        
+        #typing-text {
+            font-size: 1.1em;
+            line-height: 1.6;
+            color: var(--text-color);
+            text-shadow: 0 0 4px black;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            opacity: 0;
+            animation: fadeInText 0.5s ease 0.5s forwards;
+        }
+        
+        .typing-cursor {
+            display: inline-block;
+            width: 3px;
+            height: 1.2em;
+            background: var(--glow-color);
+            margin-left: 2px;
+            animation: blink 1s infinite;
+            vertical-align: middle;
+            box-shadow: 0 0 8px var(--glow-color);
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        
+        @keyframes fadeInText {
+            to { opacity: 1; }
+        }
+        
+        /* Mobile responsive for typing */
+        @media (max-width: 600px) {
+            .typing-container {
+                min-height: 220px;
+            }
+            
+            #typing-text {
+                font-size: 1em;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Loading Animation -->
@@ -48,11 +98,10 @@
     <div class="container">
         <div class="section-box" data-aos="fade-up">
             <h2><span>🎤 About Me</span></h2>
-            <p>
-            Hi, I'm Bow — a non-competitive gamer who enjoys games as a space to unwind, stay relaxed, and enjoy the experience without unnecessary pressure. I value balance, mindset, and the idea that gaming should be fun, engaging, and stress-free.
-
-Outside of gaming, I'm currently exploring coding and web development. This website is my first personal project, built as a learning experience and a foundation for my growth in front-end development. I'm continuously improving through hands-on practice, experimentation, and curiosity in creating intuitive web experiences. ✨
-            </p>
+            <div class="typing-container">
+                <div id="typing-text"></div>
+                <span class="typing-cursor"></span>
+            </div>
         </div>
 
         <div class="hobbies" data-aos="fade-up">
@@ -144,24 +193,24 @@ Outside of gaming, I'm currently exploring coding and web development. This webs
                 localStorage.setItem('theme', document.body.classList.contains('light') ? 'light' : 'dark');
             });
             
-            // GANTI bagian optimize video playback dengan ini:
-const video = document.getElementById('video-bg');
-if(video){
-    // Untuk mobile, set playback rate lebih rendah dan mute
-    if(isMobile){
-        video.playbackRate = 0.8; // Lebih lambat untuk menghemat baterai
-        video.muted = true; // Pastikan tetap muted
-        video.setAttribute('playsinline', ''); // Penting untuk iOS
-        video.setAttribute('webkit-playsinline', ''); // Untuk Safari iOS
-    } else {
-        video.playbackRate = 1;
-    }
-    
-    // Reduce quality on slower connections
-    if(navigator.connection && (navigator.connection.effectiveType === '2g' || navigator.connection.saveData)){
-        video.style.display = 'none';
-    }
-}
+            // Optimize video playback
+            const video = document.getElementById('video-bg');
+            if(video){
+                // Untuk mobile, set playback rate lebih rendah dan mute
+                if(isMobile){
+                    video.playbackRate = 0.8; // Lebih lambat untuk menghemat baterai
+                    video.muted = true; // Pastikan tetap muted
+                    video.setAttribute('playsinline', ''); // Penting untuk iOS
+                    video.setAttribute('webkit-playsinline', ''); // Untuk Safari iOS
+                } else {
+                    video.playbackRate = 1;
+                }
+                
+                // Reduce quality on slower connections
+                if(navigator.connection && (navigator.connection.effectiveType === '2g' || navigator.connection.saveData)){
+                    video.style.display = 'none';
+                }
+            }
             
             // Back to Top Button
             const backToTopBtn = document.getElementById('back-to-top');
@@ -177,12 +226,46 @@ if(video){
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
             
-            // Hide loading screen when page is fully loaded
+            // Typing Animation
+            const typingText = `Hi, I'm Bow — a non-competitive gamer who enjoys games as a space to unwind, stay relaxed, and enjoy the experience without unnecessary pressure. I value balance, mindset, and the idea that gaming should be fun, engaging, and stress-free.
+
+Outside of gaming, I'm currently exploring coding and web development. This website is my first personal project, built as a learning experience and a foundation for my growth in front-end development. I'm continuously improving through hands-on practice, experimentation, and curiosity in creating intuitive web experiences. ✨`;
+
+            function typeWriter() {
+                let i = 0;
+                const speed = 20; // Kecepatan mengetik (ms)
+                const textElement = document.getElementById("typing-text");
+                
+                function type() {
+                    if (i < typingText.length) {
+                        // Handle line breaks properly
+                        if (typingText.charAt(i) === '\n') {
+                            textElement.innerHTML += '<br>';
+                        } else {
+                            textElement.innerHTML += typingText.charAt(i);
+                        }
+                        i++;
+                        setTimeout(type, speed);
+                    } else {
+                        // Animation complete - hide cursor after a delay
+                        setTimeout(() => {
+                            document.querySelector('.typing-cursor').style.display = 'none';
+                        }, 1000);
+                    }
+                }
+                
+                // Start typing after a short delay
+                setTimeout(type, 800);
+            }
+            
+            // Hide loading screen when page is fully loaded and start typing
             window.addEventListener('load', () => {
                 setTimeout(() => {
                     document.getElementById('loading').style.opacity = '0';
                     setTimeout(() => {
                         document.getElementById('loading').style.display = 'none';
+                        // Start typing animation after loading is complete
+                        typeWriter();
                     }, 500);
                 }, 1000);
             });
