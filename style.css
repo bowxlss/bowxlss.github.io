@@ -89,6 +89,43 @@ h1{font-size:3em;letter-spacing:3px;color:#3d8cff;text-shadow:0 0 8px #003d7a;fo
 .favorite-category ul li{padding:5px 0;color:var(--text-color);transition:var(--animation-duration)}
 .favorite-category ul li:hover{color:var(--glow-color);transform:translateX(5px)}
 
+/* NEW: Tech Stack Icons */
+.tech-stack-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.tech-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    background: rgba(10, 20, 40, 0.5);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    color: var(--text-color);
+}
+
+.tech-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px var(--glow-color);
+}
+
+.tech-item i {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    color: var(--tag-color);
+}
+
+.tech-item span {
+    font-size: 0.9em;
+    font-weight: bold;
+    text-shadow: 0 0 4px var(--glow-color);
+}
+
 /* NEW: Live Stats Styles */
 .stats-grid {
     display: grid;
@@ -147,6 +184,16 @@ h1{font-size:3em;letter-spacing:3px;color:#3d8cff;text-shadow:0 0 8px #003d7a;fo
     }
     
     .stat-number {
+        font-size: 2em;
+    }
+    
+    /* Tech Stack Mobile */
+    .tech-stack-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+    
+    .tech-item i {
         font-size: 2em;
     }
     
