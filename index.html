@@ -49,8 +49,84 @@
         @keyframes fadeInText {
             to { opacity: 1; }
         }
-        
-        /* Mobile responsive for typing */
+
+        /* NEW: Updated Header Layout Styles */
+        .header {
+            padding: 40px 20px 30px 20px;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .profile-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .anime-img {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            box-shadow: 0 0 15px #002d5c, 0 0 30px var(--glow-color);
+            animation: neonGlow 2.5s infinite alternate;
+            margin-bottom: 15px;
+        }
+
+        .text-content {
+            flex: 1;
+            text-align: left;
+        }
+
+        .name-title {
+            font-size: 2.8em;
+            letter-spacing: 3px;
+            color: #3d8cff;
+            text-shadow: 0 0 8px #003d7a;
+            font-weight: 900;
+            margin-bottom: 10px;
+        }
+
+        .time-greeting {
+            margin: 25px 0 20px 0;
+            padding: 0;
+        }
+
+        .time-greeting h2 {
+            font-size: 1.6em;
+            color: var(--tag-color);
+            text-shadow: 0 0 12px var(--glow-color);
+            margin-bottom: 8px;
+            animation: gentlePulse 4s ease-in-out infinite;
+        }
+
+        .time-greeting p {
+            font-size: 1.1em;
+            color: var(--text-color);
+            text-shadow: 0 0 6px var(--glow-color);
+            font-style: italic;
+            margin: 0;
+            opacity: 0.9;
+        }
+
+        @keyframes gentlePulse {
+            0%, 100% { 
+                transform: scale(1);
+                text-shadow: 0 0 12px var(--glow-color);
+            }
+            50% { 
+                transform: scale(1.03);
+                text-shadow: 0 0 20px var(--glow-color);
+            }
+        }
+
+        /* Mobile responsive for new layout */
         @media (max-width: 600px) {
             .typing-container {
                 min-height: 220px;
@@ -58,6 +134,33 @@
             
             #typing-text {
                 font-size: 1em;
+            }
+
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+
+            .text-content {
+                text-align: center;
+            }
+
+            .name-title {
+                font-size: 2.2em;
+            }
+
+            .time-greeting h2 {
+                font-size: 1.4em;
+            }
+            
+            .time-greeting p {
+                font-size: 1em;
+            }
+
+            .anime-img {
+                width: 120px;
+                height: 120px;
             }
         }
     </style>
@@ -84,14 +187,32 @@
     <!-- Back to Top Button -->
     <button id="back-to-top" class="back-to-top-btn">↑</button>
 
+    <!-- UPDATED HEADER LAYOUT -->
     <div class="header">
-        <h1>bowxlss</h1>
-        <img src="img2.png" class="anime-img" loading="lazy" alt="Profile">
-        <div class="tags-container">
-            <div class="tag">Gamer</div>
-            <div class="tag">Chill Vibes</div>
-            <div class="tag">Anime & Donghua</div>
-            <div class="tag">Tech Explorer</div>
+        <div class="header-content">
+            <!-- Profile Photo on Left -->
+            <div class="profile-section">
+                <img src="img2.png" class="anime-img" loading="lazy" alt="Profile">
+            </div>
+            
+            <!-- Name and Greeting on Right -->
+            <div class="text-content">
+                <h1 class="name-title">bowxlss</h1>
+                
+                <!-- Personalized Time Greeting -->
+                <div class="time-greeting">
+                    <h2 id="time-greeting">🌅 Good Morning!</h2>
+                    <p id="greeting-message">Perfect time for some coding and chill vibes!</p>
+                </div>
+                
+                <!-- Tags Container -->
+                <div class="tags-container">
+                    <div class="tag">Gamer</div>
+                    <div class="tag">Chill Vibes</div>
+                    <div class="tag">Anime & Donghua</div>
+                    <div class="tag">Tech Explorer</div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -136,6 +257,29 @@
                         <li>Hip-Dut</li>
                         <li>Indie Pop</li>
                     </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- NEW: Live Stats Counter Section -->
+        <div class="section-box" data-aos="fade-up">
+            <h2><span>📈 Live Stats</span></h2>
+            <div class="stats-grid">
+                <div class="stat">
+                    <div class="stat-number" data-target="1560">0</div>
+                    <div class="stat-label">Website Views</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number" data-target="24">0</div>
+                    <div class="stat-label">Projects Made</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number" data-target="127">0</div>
+                    <div class="stat-label">GitHub Followers</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number" data-target="99">0</div>
+                    <div class="stat-label">Coffee Cups ☕</div>
                 </div>
             </div>
         </div>
@@ -192,6 +336,42 @@
                 // Save preference
                 localStorage.setItem('theme', document.body.classList.contains('light') ? 'light' : 'dark');
             });
+            
+            // NEW: Time Greeting Function
+            function updateGreeting() {
+                const hour = new Date().getHours();
+                const greetingElement = document.getElementById('time-greeting');
+                const messageElement = document.getElementById('greeting-message');
+                
+                let greeting, message;
+                
+                if (hour >= 5 && hour < 12) {
+                    // Morning (5 AM - 11:59 AM)
+                    greeting = '🌅 Good Morning!';
+                    message = 'Perfect time for some coding and chill vibes!';
+                } else if (hour >= 12 && hour < 18) {
+                    // Afternoon (12 PM - 5:59 PM)
+                    greeting = '☀️ Good Afternoon!';
+                    message = 'Hope you\'re having a productive day!';
+                } else if (hour >= 18 && hour < 22) {
+                    // Evening (6 PM - 9:59 PM)
+                    greeting = '🌙 Good Evening!';
+                    message = 'Great time for gaming and relaxation!';
+                } else {
+                    // Night (10 PM - 4:59 AM)
+                    greeting = '🌌 Hello Night Owl!';
+                    message = 'The world is quiet, perfect for deep work!';
+                }
+                
+                if (greetingElement) {
+                    greetingElement.innerHTML = greeting;
+                    messageElement.textContent = message;
+                }
+            }
+
+            // Initialize greeting
+            updateGreeting();
+            setInterval(updateGreeting, 60000); // Update every minute
             
             // Optimize video playback
             const video = document.getElementById('video-bg');
@@ -256,6 +436,42 @@ Outside of gaming, I'm currently exploring coding and web development. This webs
                 
                 // Start typing after a short delay
                 setTimeout(type, 800);
+            }
+            
+            // Live Stats Counter Animation
+            function animateCounter() {
+                const counters = document.querySelectorAll('.stat-number');
+                
+                counters.forEach(counter => {
+                    const target = +counter.getAttribute('data-target');
+                    const increment = target / 100;
+                    let current = 0;
+                    
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= target) {
+                            counter.textContent = target;
+                            clearInterval(timer);
+                        } else {
+                            counter.textContent = Math.floor(current);
+                        }
+                    }, 20);
+                });
+            }
+
+            // Observe stats section for animation
+            const statsSection = document.querySelector('.stats-grid');
+            if (statsSection) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            animateCounter();
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.5 });
+                
+                observer.observe(statsSection);
             }
             
             // Hide loading screen when page is fully loaded and start typing
