@@ -277,7 +277,7 @@
                     <div class="terminal-output" id="terminal-output">
                         <div class="terminal-line">
                             <span class="prompt">visitor@bowxlss-portfolio:~$ </span>
-                            <span class="command">Welcome to Dev Terminal v2.1</span>
+                            <span class="command">Welcome to Dev Terminal v3.0</span>
                         </div>
                         <div class="terminal-line">
                             <span class="output">Type 'help' to see available commands</span>
@@ -343,7 +343,7 @@
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js" defer></script>
     <script>
-        // TERMINAL GAME ENGINE
+        // TERMINAL GAME ENGINE - UPDATED WITH 7 NEW GAMES
         class TerminalGame {
             constructor() {
                 this.commands = {
@@ -366,7 +366,15 @@
                     'guess': this.startGuessGame.bind(this),
                     'rps': this.startRockPaperScissors.bind(this),
                     'quiz': this.startQuiz.bind(this),
-                    'maze': this.startMazeGame.bind(this)
+                    'maze': this.startMazeGame.bind(this),
+                    // NEW GAMES START HERE
+                    'hangman': this.startHangman.bind(this),
+                    'dice': this.startDiceGame.bind(this),
+                    'wordle': this.startWordle.bind(this),
+                    'blackjack': this.startBlackjack.bind(this),
+                    'memory': this.startMemoryGame.bind(this),
+                    'trivia': this.startTrivia.bind(this),
+                    'typing': this.startTypingTest.bind(this)
                 };
                 
                 this.currentGame = null;
@@ -453,11 +461,18 @@
                 this.addLine('  neofetch\t- System information', 'output');
                 this.addLine('  banner\t- Show cool banner', 'output');
                 this.addLine('', 'output');
-                this.addLine('Mini Games (type "game" or specific game name):', 'highlight');
-                this.addLine('  guess\t\t- Number guessing game', 'output');
-                this.addLine('  rps\t\t- Rock Paper Scissors', 'output');
-                this.addLine('  quiz\t\t- Programming quiz', 'output');
-                this.addLine('  maze\t\t- Text-based maze game', 'output');
+                this.addLine('🎮 Mini Games (type "game" or specific game name):', 'highlight');
+                this.addLine('  guess\t\t- Number guessing game (1-100)', 'output');
+                this.addLine('  rps\t\t- Rock Paper Scissors vs AI', 'output');
+                this.addLine('  quiz\t\t- Programming quiz challenge', 'output');
+                this.addLine('  maze\t\t- Text-based maze adventure', 'output');
+                this.addLine('  hangman\t- Classic hangman word game', 'output');
+                this.addLine('  dice\t\t- Dice rolling competition', 'output');
+                this.addLine('  wordle\t- Word guessing game (5 letters)', 'output');
+                this.addLine('  blackjack\t- Card game vs dealer', 'output');
+                this.addLine('  memory\t- Memory card matching game', 'output');
+                this.addLine('  trivia\t- Random trivia questions', 'output');
+                this.addLine('  typing\t- Typing speed test', 'output');
             }
             
             clearTerminal() {
@@ -504,6 +519,13 @@
                 this.addLine('• rps    - Rock Paper Scissors vs AI', 'output');
                 this.addLine('• quiz   - Programming quiz challenge', 'output');
                 this.addLine('• maze   - Text-based maze adventure', 'output');
+                this.addLine('• hangman- Classic hangman word game', 'output');
+                this.addLine('• dice   - Dice rolling competition', 'output');
+                this.addLine('• wordle - Word guessing game (5 letters)', 'output');
+                this.addLine('• blackjack - Card game vs dealer', 'output');
+                this.addLine('• memory - Memory card matching game', 'output');
+                this.addLine('• trivia - Random trivia questions', 'output');
+                this.addLine('• typing - Typing speed test', 'output');
             }
             
             toggleTheme() {
@@ -526,8 +548,8 @@
             neofetch() {
                 this.addLine('bowxlss@portfolio', 'highlight');
                 this.addLine('-------------------', 'output');
-                this.addLine('OS: Portfolio OS 2.1', 'output');
-                this.addLine('Shell: Dev Terminal v2.1', 'output');
+                this.addLine('OS: Portfolio OS 3.0', 'output');
+                this.addLine('Shell: Dev Terminal v3.0', 'output');
                 this.addLine('WM: Neon Window Manager', 'output');
                 this.addLine('Theme: Cyber Neon Dark', 'output');
                 this.addLine('Skills: HTML/CSS/JS/Python', 'output');
@@ -539,7 +561,8 @@
                 const banner = `
 ╔══════════════════════════════════╗
 ║          BOWXLSS DEV             ║
-║        TERMINAL v2.1             ║
+║        TERMINAL v3.0             ║
+║      NOW WITH 11+ GAMES!         ║
 ║                                  ║
 ║   Type 'help' for commands       ║
 ║   Type 'game' for mini games     ║
@@ -551,7 +574,7 @@
                 });
             }
             
-            // GAME FUNCTIONS
+            // ========== ORIGINAL GAMES ==========
             startGuessGame() {
                 this.currentGame = 'guess';
                 this.gameState = {
@@ -606,6 +629,152 @@
                 this.addLine('You are in a dark room. Exits: north, east', 'output');
             }
             
+            // ========== NEW GAMES ==========
+            
+            // 🎯 1. HANGMAN GAME
+            startHangman() {
+                this.currentGame = 'hangman';
+                const words = ['javascript', 'website', 'terminal', 'developer', 'portfolio', 'bowxlss', 'gaming', 'anime', 'coding', 'chill'];
+                this.gameState = {
+                    word: words[Math.floor(Math.random() * words.length)],
+                    guessed: [],
+                    attempts: 6,
+                    revealed: Array(words[0].length).fill('_')
+                };
+                
+                this.addLine('🎯 Hangman Game Started!', 'highlight');
+                this.addLine('Guess the word by typing letters!', 'output');
+                this.addLine(`Word: ${this.gameState.revealed.join(' ')}`, 'output');
+                this.addLine(`Attempts left: ${this.gameState.attempts}`, 'output');
+                this.addLine('Type a letter to guess...', 'output');
+            }
+            
+            // 🎲 2. DICE GAME
+            startDiceGame() {
+                this.currentGame = 'dice';
+                this.gameState = {
+                    playerScore: 0,
+                    computerScore: 0,
+                    targetScore: 50
+                };
+                
+                this.addLine('🎲 Dice Rolling Game!', 'highlight');
+                this.addLine('Type "roll" to roll the dice', 'output');
+                this.addLine(`First to reach ${this.gameState.targetScore} points wins!`, 'output');
+                this.addLine(`Your score: ${this.gameState.playerScore} | Computer: ${this.gameState.computerScore}`, 'output');
+            }
+            
+            // 🔤 3. WORDLE GAME
+            startWordle() {
+                this.currentGame = 'wordle';
+                const words = ['apple', 'brain', 'clock', 'dream', 'earth', 'flame', 'ghost', 'heart', 'image', 'jolly'];
+                this.gameState = {
+                    word: words[Math.floor(Math.random() * words.length)],
+                    attempts: 6,
+                    currentAttempt: 0,
+                    guesses: []
+                };
+                
+                this.addLine('🔤 Wordle Game Started!', 'highlight');
+                this.addLine('Guess the 5-letter word', 'output');
+                this.addLine('🟩 = Correct letter & position', 'output');
+                this.addLine('🟨 = Correct letter, wrong position', 'output');
+                this.addLine('⬜ = Letter not in word', 'output');
+                this.addLine(`Attempts: ${this.gameState.attempts}`, 'output');
+            }
+            
+            // 🃏 4. BLACKJACK GAME
+            startBlackjack() {
+                this.currentGame = 'blackjack';
+                this.gameState = {
+                    playerHand: [],
+                    dealerHand: [],
+                    playerScore: 0,
+                    dealerScore: 0,
+                    gameOver: false
+                };
+                
+                // Deal initial cards
+                this.dealCard('player');
+                this.dealCard('dealer');
+                this.dealCard('player');
+                this.dealCard('dealer');
+                
+                this.addLine('🃏 Blackjack Game Started!', 'highlight');
+                this.addLine('Type "hit" to get another card, "stand" to stop', 'output');
+                this.updateBlackjackDisplay();
+            }
+            
+            // 🧠 5. MEMORY GAME
+            startMemoryGame() {
+                this.currentGame = 'memory';
+                const symbols = ['A', 'B', 'C', 'D', 'E', 'F', 'A', 'B', 'C', 'D', 'E', 'F'];
+                this.gameState = {
+                    board: this.shuffleArray([...symbols]),
+                    revealed: Array(12).fill(false),
+                    firstSelection: null,
+                    matches: 0,
+                    attempts: 0
+                };
+                
+                this.addLine('🧠 Memory Game Started!', 'highlight');
+                this.addLine('Find matching pairs of letters', 'output');
+                this.addLine('Type a number (1-12) to reveal a card', 'output');
+                this.displayMemoryBoard();
+            }
+            
+            // ❓ 6. TRIVIA GAME
+            startTrivia() {
+                this.currentGame = 'trivia';
+                this.gameState = {
+                    questions: [
+                        {
+                            q: 'What year was JavaScript created?',
+                            options: ['A) 1995', 'B) 1985', 'C) 2000'],
+                            answer: 'A'
+                        },
+                        {
+                            q: 'Which planet is known as the Red Planet?',
+                            options: ['A) Venus', 'B) Mars', 'C) Jupiter'],
+                            answer: 'B'
+                        },
+                        {
+                            q: 'How many bits are in a byte?',
+                            options: ['A) 4', 'B) 8', 'C) 16'],
+                            answer: 'B'
+                        }
+                    ],
+                    currentQuestion: 0,
+                    score: 0
+                };
+                
+                this.addLine('❓ Trivia Game Started!', 'highlight');
+                this.showTriviaQuestion();
+            }
+            
+            // ⌨️  7. TYPING TEST
+            startTypingTest() {
+                this.currentGame = 'typing';
+                const texts = [
+                    'The quick brown fox jumps over the lazy dog',
+                    'Programming is the art of telling another human what one wants the computer to do',
+                    'Coding is not just code, that is the easy part, the hard part is making it work',
+                    'JavaScript is the language of the web browser'
+                ];
+                this.gameState = {
+                    text: texts[Math.floor(Math.random() * texts.length)],
+                    startTime: null,
+                    completed: false
+                };
+                
+                this.addLine('⌨️  Typing Test Started!', 'highlight');
+                this.addLine('Type the following text as fast as you can:', 'output');
+                this.addLine(`"${this.gameState.text}"`, 'highlight');
+                this.addLine('Press Enter when ready to start typing...', 'output');
+                this.gameState.startTime = Date.now();
+            }
+            
+            // ========== GAME INPUT HANDLERS ==========
             handleGameInput(input) {
                 switch (this.currentGame) {
                     case 'guess':
@@ -620,9 +789,31 @@
                     case 'maze':
                         this.handleMazeInput(input);
                         break;
+                    case 'hangman':
+                        this.handleHangmanInput(input);
+                        break;
+                    case 'dice':
+                        this.handleDiceInput(input);
+                        break;
+                    case 'wordle':
+                        this.handleWordleInput(input);
+                        break;
+                    case 'blackjack':
+                        this.handleBlackjackInput(input);
+                        break;
+                    case 'memory':
+                        this.handleMemoryInput(input);
+                        break;
+                    case 'trivia':
+                        this.handleTriviaInput(input);
+                        break;
+                    case 'typing':
+                        this.handleTypingInput(input);
+                        break;
                 }
             }
             
+            // Original game handlers
             handleGuessInput(input) {
                 const guess = parseInt(input);
                 this.gameState.attempts++;
@@ -717,6 +908,290 @@
                     this.addLine(`You moved ${direction}. The maze continues...`, 'output');
                     this.addLine('Exits: north, south, east, west', 'output');
                 }
+            }
+            
+            // ========== NEW GAME HANDLERS ==========
+            
+            // 🎯 Hangman Handler
+            handleHangmanInput(input) {
+                const letter = input.toLowerCase();
+                
+                if (letter.length !== 1 || !letter.match(/[a-z]/)) {
+                    this.addLine('Please enter a single letter!', 'error');
+                    return;
+                }
+                
+                if (this.gameState.guessed.includes(letter)) {
+                    this.addLine(`You already guessed "${letter}"!`, 'error');
+                    return;
+                }
+                
+                this.gameState.guessed.push(letter);
+                
+                if (this.gameState.word.includes(letter)) {
+                    this.addLine(`Good guess! "${letter}" is in the word.`, 'success');
+                    
+                    // Update revealed word
+                    for (let i = 0; i < this.gameState.word.length; i++) {
+                        if (this.gameState.word[i] === letter) {
+                            this.gameState.revealed[i] = letter;
+                        }
+                    }
+                } else {
+                    this.gameState.attempts--;
+                    this.addLine(`Wrong! "${letter}" is not in the word.`, 'error');
+                }
+                
+                // Display current state
+                this.addLine(`Word: ${this.gameState.revealed.join(' ')}`, 'output');
+                this.addLine(`Attempts left: ${this.gameState.attempts}`, 'output');
+                this.addLine(`Guessed letters: ${this.gameState.guessed.join(', ')}`, 'output');
+                
+                // Check win/lose conditions
+                if (!this.gameState.revealed.includes('_')) {
+                    this.addLine('🎉 Congratulations! You won!', 'success');
+                    this.addLine(`The word was: ${this.gameState.word}`, 'output');
+                    this.currentGame = null;
+                } else if (this.gameState.attempts <= 0) {
+                    this.addLine('💀 Game Over! You ran out of attempts.', 'error');
+                    this.addLine(`The word was: ${this.gameState.word}`, 'output');
+                    this.currentGame = null;
+                }
+            }
+            
+            // 🎲 Dice Handler
+            handleDiceInput(input) {
+                if (input !== 'roll') {
+                    this.addLine('Type "roll" to roll the dice!', 'error');
+                    return;
+                }
+                
+                const playerRoll = Math.floor(Math.random() * 6) + 1;
+                const computerRoll = Math.floor(Math.random() * 6) + 1;
+                
+                this.gameState.playerScore += playerRoll;
+                this.gameState.computerScore += computerRoll;
+                
+                this.addLine(`🎲 You rolled: ${playerRoll}`, 'output');
+                this.addLine(`🤖 Computer rolled: ${computerRoll}`, 'output');
+                this.addLine(`📊 Your score: ${this.gameState.playerScore} | Computer: ${this.gameState.computerScore}`, 'output');
+                
+                // Check win conditions
+                if (this.gameState.playerScore >= this.gameState.targetScore && 
+                    this.gameState.computerScore >= this.gameState.targetScore) {
+                    this.addLine('🤝 It\'s a tie!', 'highlight');
+                    this.currentGame = null;
+                } else if (this.gameState.playerScore >= this.gameState.targetScore) {
+                    this.addLine('🎉 You win!', 'success');
+                    this.currentGame = null;
+                } else if (this.gameState.computerScore >= this.gameState.targetScore) {
+                    this.addLine('💻 Computer wins!', 'error');
+                    this.currentGame = null;
+                }
+            }
+            
+            // 🔤 Wordle Handler
+            handleWordleInput(input) {
+                const guess = input.toLowerCase();
+                
+                if (guess.length !== 5 || !guess.match(/[a-z]{5}/)) {
+                    this.addLine('Please enter a 5-letter word!', 'error');
+                    return;
+                }
+                
+                this.gameState.currentAttempt++;
+                let result = '';
+                
+                for (let i = 0; i < 5; i++) {
+                    if (guess[i] === this.gameState.word[i]) {
+                        result += '🟩';
+                    } else if (this.gameState.word.includes(guess[i])) {
+                        result += '🟨';
+                    } else {
+                        result += '⬜';
+                    }
+                }
+                
+                this.addLine(`${guess.toUpperCase()} - ${result}`, 'output');
+                
+                if (guess === this.gameState.word) {
+                    this.addLine('🎉 You guessed the word!', 'success');
+                    this.currentGame = null;
+                } else if (this.gameState.currentAttempt >= this.gameState.attempts) {
+                    this.addLine(`💀 Game Over! The word was: ${this.gameState.word}`, 'error');
+                    this.currentGame = null;
+                } else {
+                    this.addLine(`Attempts left: ${this.gameState.attempts - this.gameState.currentAttempt}`, 'output');
+                }
+            }
+            
+            // 🃏 Blackjack Helper Functions
+            dealCard(player) {
+                const card = Math.min(10, Math.floor(Math.random() * 13) + 1); // 1-10, face cards = 10
+                this.gameState[player + 'Hand'].push(card);
+                this.updateScores();
+            }
+            
+            updateScores() {
+                this.gameState.playerScore = this.gameState.playerHand.reduce((a, b) => a + b, 0);
+                this.gameState.dealerScore = this.gameState.dealerHand.reduce((a, b) => a + b, 0);
+            }
+            
+            updateBlackjackDisplay() {
+                this.addLine(`Your hand: ${this.gameState.playerHand.join(', ')} (Total: ${this.gameState.playerScore})`, 'output');
+                this.addLine(`Dealer shows: ${this.gameState.dealerHand[0]}`, 'output');
+            }
+            
+            // 🃏 Blackjack Handler
+            handleBlackjackInput(input) {
+                if (this.gameState.gameOver) {
+                    this.addLine('Game over! Start a new game with "blackjack"', 'error');
+                    return;
+                }
+                
+                const action = input.toLowerCase();
+                
+                if (action === 'hit') {
+                    this.dealCard('player');
+                    this.addLine(`You drew: ${this.gameState.playerHand[this.gameState.playerHand.length - 1]}`, 'output');
+                    
+                    if (this.gameState.playerScore > 21) {
+                        this.addLine('💥 You bust! Dealer wins.', 'error');
+                        this.gameState.gameOver = true;
+                    } else {
+                        this.updateBlackjackDisplay();
+                    }
+                } else if (action === 'stand') {
+                    // Dealer's turn
+                    while (this.gameState.dealerScore < 17) {
+                        this.dealCard('dealer');
+                    }
+                    
+                    this.addLine(`Dealer's hand: ${this.gameState.dealerHand.join(', ')} (Total: ${this.gameState.dealerScore})`, 'output');
+                    
+                    if (this.gameState.dealerScore > 21 || this.gameState.playerScore > this.gameState.dealerScore) {
+                        this.addLine('🎉 You win!', 'success');
+                    } else if (this.gameState.playerScore < this.gameState.dealerScore) {
+                        this.addLine('💻 Dealer wins!', 'error');
+                    } else {
+                        this.addLine('🤝 Push! It\'s a tie.', 'output');
+                    }
+                    
+                    this.gameState.gameOver = true;
+                } else {
+                    this.addLine('Invalid action! Use: hit, stand', 'error');
+                }
+            }
+            
+            // 🧠 Memory Helper
+            shuffleArray(array) {
+                for (let i = array.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [array[i], array[j]] = [array[j], array[i]];
+                }
+                return array;
+            }
+            
+            displayMemoryBoard() {
+                let display = '';
+                for (let i = 0; i < 12; i++) {
+                    if (this.gameState.revealed[i]) {
+                        display += `[${this.gameState.board[i]}] `;
+                    } else {
+                        display += `[${i + 1}] `;
+                    }
+                    if ((i + 1) % 4 === 0) display += '\n';
+                }
+                this.addLine(display, 'output');
+            }
+            
+            // 🧠 Memory Handler
+            handleMemoryInput(input) {
+                const position = parseInt(input) - 1;
+                
+                if (isNaN(position) || position < 0 || position > 11) {
+                    this.addLine('Please enter a number between 1 and 12!', 'error');
+                    return;
+                }
+                
+                if (this.gameState.revealed[position]) {
+                    this.addLine('This card is already revealed!', 'error');
+                    return;
+                }
+                
+                this.gameState.revealed[position] = true;
+                this.gameState.attempts++;
+                
+                this.addLine(`Revealed: ${this.gameState.board[position]} at position ${input}`, 'output');
+                
+                if (this.gameState.firstSelection === null) {
+                    this.gameState.firstSelection = position;
+                } else {
+                    const firstPos = this.gameState.firstSelection;
+                    if (this.gameState.board[firstPos] === this.gameState.board[position]) {
+                        this.addLine('🎉 Match found!', 'success');
+                        this.gameState.matches++;
+                    } else {
+                        this.addLine('No match!', 'error');
+                        this.gameState.revealed[firstPos] = false;
+                        this.gameState.revealed[position] = false;
+                    }
+                    this.gameState.firstSelection = null;
+                }
+                
+                this.displayMemoryBoard();
+                
+                if (this.gameState.matches === 6) {
+                    this.addLine(`🎉 You won in ${this.gameState.attempts} attempts!`, 'success');
+                    this.currentGame = null;
+                }
+            }
+            
+            // ❓ Trivia Handler
+            showTriviaQuestion() {
+                const question = this.gameState.questions[this.gameState.currentQuestion];
+                this.addLine(`Question ${this.gameState.currentQuestion + 1}: ${question.q}`, 'highlight');
+                question.options.forEach(option => {
+                    this.addLine(option, 'output');
+                });
+            }
+            
+            handleTriviaInput(input) {
+                const question = this.gameState.questions[this.gameState.currentQuestion];
+                const answer = input.toUpperCase();
+                
+                if (answer === question.answer) {
+                    this.gameState.score++;
+                    this.addLine('✅ Correct!', 'success');
+                } else {
+                    this.addLine(`❌ Wrong! Correct answer was ${question.answer}`, 'error');
+                }
+                
+                this.gameState.currentQuestion++;
+                
+                if (this.gameState.currentQuestion < this.gameState.questions.length) {
+                    setTimeout(() => this.showTriviaQuestion(), 1000);
+                } else {
+                    this.addLine(`🎯 Trivia completed! Score: ${this.gameState.score}/${this.gameState.questions.length}`, 'highlight');
+                    this.currentGame = null;
+                }
+            }
+            
+            // ⌨️  Typing Handler
+            handleTypingInput(input) {
+                const endTime = Date.now();
+                const timeTaken = (endTime - this.gameState.startTime) / 1000;
+                const words = input.split(' ').length;
+                const wpm = Math.round((words / timeTaken) * 60);
+                
+                if (input === this.gameState.text) {
+                    this.addLine(`🎉 Perfect! Time: ${timeTaken.toFixed(2)}s | Speed: ${wpm} WPM`, 'success');
+                } else {
+                    this.addLine(`⌨️  Time: ${timeTaken.toFixed(2)}s | Speed: ${wpm} WPM`, 'output');
+                    this.addLine('But there were some errors in your typing.', 'error');
+                }
+                
+                this.currentGame = null;
             }
         }
 
