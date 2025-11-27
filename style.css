@@ -7,9 +7,14 @@ img{image-rendering:-webkit-optimize-contrast;image-rendering:crisp-edges}
 #video-bg{position:fixed;top:50%;left:50%;min-width:100%;min-height:100%;width:auto;height:auto;transform:translate(-50%,-50%);z-index:-3;object-fit:cover;pointer-events:none;will-change:auto;filter:blur(0);transform:translate3d(-50%,-50%,0);backface-visibility:hidden;-webkit-backface-visibility:hidden}
 body::before{content:"";position:fixed;top:0;left:0;width:100%;height:100%;background:var(--overlay-color);z-index:-1}
 #particles-js{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-2}
-.header{padding:60px 20px}
+
+/* UPDATED: Header Styles - Simplified for new layout */
+.header{padding:40px 20px 30px 20px}
+
+/* Keep original h1 styles but they'll be overridden by new layout */
 h1{font-size:3em;letter-spacing:3px;color:#3d8cff;text-shadow:0 0 8px #003d7a;font-weight:900}
-.tags-container{margin-top:30px;display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
+
+.tags-container{margin-top:20px;display:flex;flex-wrap:wrap;justify-content:flex-start;gap:10px}
 .tag{padding:6px 14px;border-radius:20px;background:var(--tag-bg);color:var(--tag-color);font-weight:700;font-size:.9em;text-shadow:0 0 4px var(--glow-color);transition:transform var(--animation-duration),box-shadow var(--animation-duration)}
 .tag:hover{transform:scale(1.1);box-shadow:0 0 8px var(--glow-color)}
 .container{max-width:800px;margin:auto;padding:20px;font-size:1.1em}
@@ -24,7 +29,8 @@ h1{font-size:3em;letter-spacing:3px;color:#3d8cff;text-shadow:0 0 8px #003d7a;fo
 .social-btn img{width:22px;height:22px;filter:brightness(95%)}
 .social-title{font-size:2em;color:#ff75ff;text-shadow:0 0 6px var(--glow-color),0 0 12px var(--glow-color);margin-top:5vw;margin-bottom:15px;animation:flickerGlow 1.5s infinite alternate}
 .social-title span{display:inline-block;animation:floatEmoji 2s infinite alternate}
-.anime-img{width:180px;height:180px;margin:auto;display:block;border-radius:50%;box-shadow:0 0 15px #002d5c,0 0 30px var(--glow-color);animation:neonGlow 2.5s infinite alternate;margin-top:20px}
+
+/* UPDATED: Remove old anime-img styles as they're now in inline CSS */
 .footer{margin-top:50px;padding:20px 10px;font-size:1em;color:var(--tag-color);text-shadow:0 0 4px var(--glow-color),0 0 8px var(--glow-color);display:flex;flex-direction:column;align-items:center;gap:8px}
 .footer span{display:inline-block;animation:float 2s infinite alternate}
 .footer-icons{display:flex;gap:12px}
@@ -83,12 +89,47 @@ h1{font-size:3em;letter-spacing:3px;color:#3d8cff;text-shadow:0 0 8px #003d7a;fo
 .favorite-category ul li{padding:5px 0;color:var(--text-color);transition:var(--animation-duration)}
 .favorite-category ul li:hover{color:var(--glow-color);transform:translateX(5px)}
 
+/* NEW: Live Stats Styles */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.stat {
+    text-align: center;
+    padding: 20px;
+    background: rgba(10, 20, 40, 0.5);
+    border-radius: 10px;
+    border: 1px solid rgba(61, 140, 255, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stat:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 20px var(--glow-color);
+}
+
+.stat-number {
+    font-size: 2.5em;
+    font-weight: bold;
+    color: var(--tag-color);
+    text-shadow: 0 0 10px var(--glow-color);
+    margin-bottom: 8px;
+}
+
+.stat-label {
+    font-size: 0.9em;
+    color: var(--text-color);
+    text-shadow: 0 0 4px var(--glow-color);
+}
+
 /* Enhanced Mobile Optimizations - VIDEO TAMPIL */
 @media(max-width:600px){
     .social-title{font-size:1.6em;margin-top:8vw}
     .section-box h2,.hobbies h2{font-size:1.6em}
     .hobbies ul li,.social-btn{font-size:1em}
-    .anime-img{width:140px;height:140px}
     .project-list{padding-left:15px;margin-top:10px;}
     
     /* VIDEO BACKGROUND TAMPIL DI MOBILE */
@@ -97,6 +138,16 @@ h1{font-size:3em;letter-spacing:3px;color:#3d8cff;text-shadow:0 0 8px #003d7a;fo
         min-width: 100%;
         min-height: 100%;
         object-fit: cover;
+    }
+    
+    /* Stats Grid Mobile */
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+    
+    .stat-number {
+        font-size: 2em;
     }
     
     body{background:var(--bg-color) radial-gradient(circle at center,rgba(0,61,122,.3),transparent)}
