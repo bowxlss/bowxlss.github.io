@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects & Skills - Bowxlss</title>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
+    <!-- External CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Loading Animation -->
+    <div id="loading">
+        <div class="loading-spinner"></div>
+        <p>Loading...</p>
+    </div>
+
+    <!-- Video Background - Optimized -->
+    <video id="video-bg" autoplay loop muted playsinline preload="auto" poster="video-poster.jpg">
+        <source src="bg-video.mp4" type="video/mp4">
+    </video>
+
+    <div id="particles-js"></div>
+    
+    <!-- Improved Theme Toggle -->
+    <button id="theme-toggle" class="theme-toggle-btn">
+        <span class="theme-icon">🌙</span>
+    </button>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top-btn">↑</button>
+
+    <div class="header">
+        <h1>Projects & Skills</h1>
+    </div>
+
+    <div class="container">
+        <!-- Projects Section -->
+        <div class="section-box" data-aos="fade-up">
+            <h2><span>💻 My Projects</span></h2>
+            <div class="project-grid">
+                <div class="project-item">
+                    <img src="images/personal-website.png" alt="Personal Website" loading="lazy">
+                    <div class="project-content">
+                        <h3>Personal Website</h3>
+                        <p>Dark-themed neon site built with HTML, CSS, JS + particles & AOS.</p>
+                    </div>
+                </div>
+                <div class="project-item">
+                    <img src="images/samp-script.jpg" alt="SAMP Script" loading="lazy">
+                    <div class="project-content">
+                        <h3>SAMP Script Collection</h3>
+                        <p>Fun GTA SA multiplayer scripts: NPCs, mini-games & interactive triggers.</p>
+                    </div>
+                </div>
+                <div class="project-item">
+                    <img src="images/anime-tracker.jpg" alt="Anime Tracker" loading="lazy">
+                    <div class="project-content">
+                        <h3>Anime Tracker Web App</h3>
+                        <p>Prototype to track anime episodes & progress with JS & local storage.</p>
+                    </div>
+                </div>
+                <div class="project-item">
+                    <img src="images/chill-mods.jpg" alt="Chill Mods" loading="lazy">
+                    <div class="project-content">
+                        <h3>Chill Game Mods</h3>
+                        <p>Minor mods in single-player games to learn logic & programming.</p>
+                    </div>
+                </div>
+                <div class="project-item">
+                    <img src="images/mini-js-games.jpg" alt="Mini JS Games" loading="lazy">
+                    <div class="project-content">
+                        <h3>Mini JS Games</h3>
+                        <p>Small browser-based games: clickers, puzzles & interactive fun.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Skills / Tools Section - IMPROVED -->
+        <div class="section-box" data-aos="fade-up">
+            <h2><span>🛠️ Skills & Tools</span></h2>
+            <div class="skills-container" style="margin-top:20px;">
+                <div class="skill">
+                    <div class="skill-header">
+                        <span class="skill-name">HTML</span>
+                        <span class="skill-percent">90%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-fill" style="--skill-width:90%;"></div>
+                    </div>
+                </div>
+                <div class="skill">
+                    <div class="skill-header">
+                        <span class="skill-name">CSS</span>
+                        <span class="skill-percent">85%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-fill" style="--skill-width:85%;"></div>
+                    </div>
+                </div>
+                <div class="skill">
+                    <div class="skill-header">
+                        <span class="skill-name">JavaScript</span>
+                        <span class="skill-percent">75%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-fill" style="--skill-width:75%;"></div>
+                    </div>
+                </div>
+                <div class="skill">
+                    <div class="skill-header">
+                        <span class="skill-name">Python</span>
+                        <span class="skill-percent">70%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-fill" style="--skill-width:70%;"></div>
+                    </div>
+                </div>
+                <div class="skill">
+                    <div class="skill-header">
+                        <span class="skill-name">Git & GitHub</span>
+                        <span class="skill-percent">80%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-fill" style="--skill-width:80%;"></div>
+                    </div>
+                </div>
+                <div class="skill">
+                    <div class="skill-header">
+                        <span class="skill-name">GTA SAMP Scripting</span>
+                        <span class="skill-percent">90%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-fill" style="--skill-width:90%;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Highlights Section -->
+        <div class="section-box" data-aos="fade-up">
+            <h2><span>🏆 Highlights & Achievements</span></h2>
+            <ul class="project-list" style="text-align:left; padding-left:20px; margin-top:10px; overflow:visible !important;">
+                <li>Started learning web dev & deployed projects on GitHub Pages.</li>
+                <li>Focused on chill gaming lifestyle & stress-free learning.</li>
+                <li>Experimented with AI tools to create websites & scripts.</li>
+            </ul>
+        </div>
+
+        <a class="social-btn" href="index.html" style="margin-top:30px;display:inline-flex;align-items:center;gap:10px;padding:10px 15px;background:var(--section-bg);color:var(--text-color);border-radius:6px;text-decoration:none;box-shadow:0 0 12px var(--glow-color);">⬅️ Back to Home</a>
+    </div>
+
+    <div class="footer" data-aos="fade-up">
+        <span>© 2025 Bowxlss. All rights reserved. ✨</span>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js" defer></script>
+    <script>
+        document.addEventListener("DOMContentLoaded",function(){
+            // Initialize AOS
+            AOS.init({duration:800,once:true,disable:'mobile'});
+            
+            // Optimize particles for performance
+            const isMobile = window.innerWidth <= 600;
+            particlesJS('particles-js',{particles:{number:{value:isMobile?30:60},color:{value:"#ff00ff"},shape:{type:"circle"},opacity:{value:.6,random:true},size:{value:2,random:true},line_linked:{enable:false},move:{enable:true,speed:.4}}});
+            
+            // Improved Theme Toggle with Smooth Transition & Local Storage
+            const themeToggle = document.getElementById('theme-toggle');
+            const themeIcon = themeToggle.querySelector('.theme-icon');
+            
+            // Load saved theme
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'light') {
+                document.body.classList.add('light');
+                themeIcon.textContent = '☀️';
+            }
+            
+            themeToggle.addEventListener('click',()=>{
+                document.body.style.transition = 'all 0.5s ease';
+                document.body.classList.toggle('light');
+                
+                // Update icon
+                themeIcon.textContent = document.body.classList.contains('light') ? '☀️' : '🌙';
+                
+                // Save preference
+                localStorage.setItem('theme', document.body.classList.contains('light') ? 'light' : 'dark');
+            });
+            
+            // GANTI bagian optimize video playback dengan ini:
+const video = document.getElementById('video-bg');
+if(video){
+    // Untuk mobile, set playback rate lebih rendah dan mute
+    if(isMobile){
+        video.playbackRate = 0.8; // Lebih lambat untuk menghemat baterai
+        video.muted = true; // Pastikan tetap muted
+        video.setAttribute('playsinline', ''); // Penting untuk iOS
+        video.setAttribute('webkit-playsinline', ''); // Untuk Safari iOS
+    } else {
+        video.playbackRate = 1;
+    }
+    
+    // Reduce quality on slower connections
+    if(navigator.connection && (navigator.connection.effectiveType === '2g' || navigator.connection.saveData)){
+        video.style.display = 'none';
+    }
+}
+            
+            // Back to Top Button
+            const backToTopBtn = document.getElementById('back-to-top');
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    backToTopBtn.style.display = 'block';
+                } else {
+                    backToTopBtn.style.display = 'none';
+                }
+            });
+            
+            backToTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+            
+            // Hide loading screen when page is fully loaded
+            window.addEventListener('load', () => {
+                setTimeout(() => {
+                    document.getElementById('loading').style.opacity = '0';
+                    setTimeout(() => {
+                        document.getElementById('loading').style.display = 'none';
+                    }, 500);
+                }, 1000);
+            });
+            
+            // Mobile optimizations
+            if (isMobile) {
+                // Reduce animations for better performance
+                document.body.style.setProperty('--animation-duration', '0.5s');
+            }
+        });
+    </script>
+</body>
+</html>

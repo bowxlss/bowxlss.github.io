@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>about-bowxlss</title>
+    <!-- Prefetch / Cache -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+    <!-- AOS CSS for scroll reveal -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
+    <!-- External CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Loading Animation -->
+    <div id="loading">
+        <div class="loading-spinner"></div>
+        <p>Loading...</p>
+    </div>
+
+    <!-- Video Background - Optimized -->
+    <video id="video-bg" autoplay loop muted playsinline preload="auto" poster="video-poster.jpg">
+        <source src="bg-video.mp4" type="video/mp4">
+    </video>
+
+    <div id="particles-js"></div>
+    
+    <!-- Improved Theme Toggle -->
+    <button id="theme-toggle" class="theme-toggle-btn">
+        <span class="theme-icon">🌙</span>
+    </button>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top-btn">↑</button>
+
+    <div class="header">
+        <h1>bowxlss</h1>
+        <img src="img2.png" class="anime-img" loading="lazy" alt="Profile">
+        <div class="tags-container">
+            <div class="tag">Gamer</div>
+            <div class="tag">Chill Vibes</div>
+            <div class="tag">Anime & Donghua</div>
+            <div class="tag">Tech Explorer</div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="section-box" data-aos="fade-up">
+            <h2><span>🎤 About Me</span></h2>
+            <p>
+            Hi, I'm Bow — a non-competitive gamer who enjoys games as a space to unwind, stay relaxed, and enjoy the experience without unnecessary pressure. I value balance, mindset, and the idea that gaming should be fun, engaging, and stress-free.
+
+Outside of gaming, I'm currently exploring coding and web development. This website is my first personal project, built as a learning experience and a foundation for my growth in front-end development. I'm continuously improving through hands-on practice, experimentation, and curiosity in creating intuitive web experiences. ✨
+            </p>
+        </div>
+
+        <div class="hobbies" data-aos="fade-up">
+            <h2><span>🎮 Hobbies & Interests ✨</span></h2>
+            <ul>
+                <li>🎲 Gaming & Chill Sessions</li>
+                <li>💻 Web Development & Coding</li>
+                <li>📺 Watching Anime & Series</li>
+                <li>🎵 Music & Chill Beats</li>
+                <li>🛠️ Exploring Tech & Gadgets</li>
+            </ul>
+        </div>
+
+        <!-- New: Favorite Games & Music Section -->
+        <div class="section-box" data-aos="fade-up">
+            <h2><span>🎵 Favorite Games & Music</span></h2>
+            <div class="favorites-grid">
+                <div class="favorite-category">
+                    <h3>🎮 Currently Playing</h3>
+                    <ul>
+                        <li>GTA SAMP</li>
+                        <li>Free Fire</li>
+                        <li>Delta Force</li>
+                        <li>Roblox</li>
+                    </ul>
+                </div>
+                <div class="favorite-category">
+                    <h3>🎧 Music Vibes</h3>
+                    <ul>
+                        <li>Lofi Hip Hop</li>
+                        <li>Chill Beats</li>
+                        <li>Hip-Dut</li>
+                        <li>Indie Pop</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="social-title" data-aos="fade-up"><span>📱 Social Media</span></div>
+        <div class="social-container" data-aos="fade-up">
+            <a class="social-btn" href="https://instagram.com/bowxlss_" target="_blank" rel="noopener"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" loading="lazy" alt="Instagram"> Instagram</a>
+            <a class="social-btn" href="https://tiktok.com/@bowxlss_" target="_blank" rel="noopener"><img src="https://cdn-icons-png.flaticon.com/512/3046/3046122.png" loading="lazy" alt="TikTok"> TikTok</a>
+            <a class="social-btn" href="https://t.me/bowxlss" target="_blank" rel="noopener"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png" loading="lazy" alt="Telegram"> Telegram</a>
+            <a class="social-btn" href="https://github.com/bowxlss" target="_blank" rel="noopener"><img src="https://cdn-icons-png.flaticon.com/512/733/733553.png" loading="lazy" alt="GitHub"> GitHub</a>
+            <a class="social-btn" href="https://discord.com/users/bowxlss" target="_blank" rel="noopener"><img src="https://cdn-icons-png.flaticon.com/512/3670/3670157.png" loading="lazy" alt="Discord"> Discord</a>
+            <a class="social-btn" href="second.html"><img src="https://cdn-icons-png.flaticon.com/512/1828/1828911.png" loading="lazy" alt="Projects"> Projects & Skills</a>
+        </div>
+    </div>
+
+    <div class="footer" data-aos="fade-up">
+        <span>© 2025 Bowxlss. All rights reserved. ✨</span>
+        <div class="footer-icons">
+            <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" loading="lazy">
+            <img src="https://cdn-icons-png.flaticon.com/512/3046/3046122.png" alt="TikTok" loading="lazy">
+            <img src="https://cdn-icons-png.flaticon.com/512/733/733553.png" alt="GitHub" loading="lazy">
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js" defer></script>
+    <script>
+        document.addEventListener("DOMContentLoaded",function(){
+            // Initialize AOS
+            AOS.init({duration:800,once:true,disable:'mobile'});
+            
+            // Optimize particles for performance
+            const isMobile = window.innerWidth <= 600;
+            particlesJS('particles-js',{particles:{number:{value:isMobile?30:60},color:{value:"#ff00ff"},shape:{type:"circle"},opacity:{value:.6,random:true},size:{value:2,random:true},line_linked:{enable:false},move:{enable:true,speed:.4}}});
+            
+            // Improved Theme Toggle with Smooth Transition & Local Storage
+            const themeToggle = document.getElementById('theme-toggle');
+            const themeIcon = themeToggle.querySelector('.theme-icon');
+            
+            // Load saved theme
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'light') {
+                document.body.classList.add('light');
+                themeIcon.textContent = '☀️';
+            }
+            
+            themeToggle.addEventListener('click',()=>{
+                document.body.style.transition = 'all 0.5s ease';
+                document.body.classList.toggle('light');
+                
+                // Update icon
+                themeIcon.textContent = document.body.classList.contains('light') ? '☀️' : '🌙';
+                
+                // Save preference
+                localStorage.setItem('theme', document.body.classList.contains('light') ? 'light' : 'dark');
+            });
+            
+            // GANTI bagian optimize video playback dengan ini:
+const video = document.getElementById('video-bg');
+if(video){
+    // Untuk mobile, set playback rate lebih rendah dan mute
+    if(isMobile){
+        video.playbackRate = 0.8; // Lebih lambat untuk menghemat baterai
+        video.muted = true; // Pastikan tetap muted
+        video.setAttribute('playsinline', ''); // Penting untuk iOS
+        video.setAttribute('webkit-playsinline', ''); // Untuk Safari iOS
+    } else {
+        video.playbackRate = 1;
+    }
+    
+    // Reduce quality on slower connections
+    if(navigator.connection && (navigator.connection.effectiveType === '2g' || navigator.connection.saveData)){
+        video.style.display = 'none';
+    }
+}
+            
+            // Back to Top Button
+            const backToTopBtn = document.getElementById('back-to-top');
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    backToTopBtn.style.display = 'block';
+                } else {
+                    backToTopBtn.style.display = 'none';
+                }
+            });
+            
+            backToTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+            
+            // Hide loading screen when page is fully loaded
+            window.addEventListener('load', () => {
+                setTimeout(() => {
+                    document.getElementById('loading').style.opacity = '0';
+                    setTimeout(() => {
+                        document.getElementById('loading').style.display = 'none';
+                    }, 500);
+                }, 1000);
+            });
+            
+            // Mobile optimizations
+            if (isMobile) {
+                // Reduce animations for better performance
+                document.body.style.setProperty('--animation-duration', '0.5s');
+            }
+        });
+    </script>
+</body>
+</html>
