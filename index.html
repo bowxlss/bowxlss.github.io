@@ -126,6 +126,376 @@
             }
         }
 
+        /* NEW: XP System Styles */
+        .xp-system {
+            background: linear-gradient(135deg, rgba(10,20,40,0.8), rgba(61,140,255,0.2));
+            border: 2px solid var(--glow-color);
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 30px;
+            box-shadow: 0 0 25px var(--glow-color);
+        }
+
+        .xp-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .xp-level {
+            font-size: 1.4em;
+            color: var(--tag-color);
+            text-shadow: 0 0 8px var(--glow-color);
+        }
+
+        .xp-points {
+            font-size: 1.1em;
+            color: #ffd700;
+            text-shadow: 0 0 6px #ffd700;
+        }
+
+        .xp-bar {
+            width: 100%;
+            height: 20px;
+            background: rgba(10,20,40,0.7);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid var(--glow-color);
+            box-shadow: 0 0 8px var(--glow-color) inset;
+        }
+
+        .xp-progress {
+            height: 100%;
+            background: linear-gradient(90deg, #ff00ff, #3d8cff);
+            border-radius: 10px;
+            width: 65%;
+            transition: width 2s ease-in-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .xp-progress::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .xp-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .xp-action {
+            background: rgba(61,140,255,0.1);
+            border: 1px solid var(--glow-color);
+            border-radius: 8px;
+            padding: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .xp-action:hover {
+            background: rgba(61,140,255,0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px var(--glow-color);
+        }
+
+        .xp-action.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* NEW: Visitor Map Styles */
+        .visitor-map {
+            background: linear-gradient(135deg, rgba(10,20,40,0.9), rgba(0,100,255,0.3));
+            border: 2px solid var(--glow-color);
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .map-container {
+            height: 200px;
+            background: rgba(5,10,21,0.8);
+            border-radius: 10px;
+            border: 1px solid var(--glow-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .map-point {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #ff00ff;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #ff00ff;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.5); opacity: 0.7; }
+        }
+
+        .visitor-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .visitor-stat {
+            text-align: center;
+            padding: 10px;
+            background: rgba(61,140,255,0.1);
+            border-radius: 8px;
+            border: 1px solid var(--glow-color);
+        }
+
+        /* NEW: AI Chat Styles */
+        .ai-chat {
+            background: linear-gradient(135deg, rgba(10,20,40,0.9), rgba(255,0,255,0.2));
+            border: 2px solid var(--glow-color);
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        .chat-container {
+            height: 200px;
+            background: rgba(5,10,21,0.8);
+            border-radius: 10px;
+            border: 1px solid var(--glow-color);
+            padding: 15px;
+            overflow-y: auto;
+            margin-bottom: 15px;
+        }
+
+        .chat-message {
+            margin-bottom: 10px;
+            padding: 8px 12px;
+            border-radius: 8px;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+
+        .chat-message.bot {
+            background: rgba(61,140,255,0.2);
+            border-left: 3px solid var(--glow-color);
+            margin-right: auto;
+        }
+
+        .chat-message.user {
+            background: rgba(255,0,255,0.2);
+            border-right: 3px solid #ff00ff;
+            margin-left: auto;
+            text-align: right;
+        }
+
+        .chat-input-container {
+            display: flex;
+            gap: 10px;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 10px;
+            background: rgba(10,20,40,0.7);
+            border: 1px solid var(--glow-color);
+            border-radius: 8px;
+            color: var(--text-color);
+            font-family: 'Courier New', monospace;
+        }
+
+        .chat-send {
+            padding: 10px 20px;
+            background: var(--glow-color);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .chat-send:hover {
+            background: #ff00ff;
+            transform: scale(1.05);
+        }
+
+        /* NEW: Live Coding Styles */
+        .live-coding {
+            background: linear-gradient(135deg, rgba(10,20,40,0.9), rgba(0,255,255,0.2));
+            border: 2px solid var(--glow-color);
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        .code-editor {
+            background: rgba(5,10,21,0.9);
+            border: 1px solid var(--glow-color);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+
+        .editor-header {
+            background: rgba(10,20,40,0.8);
+            padding: 10px 15px;
+            border-bottom: 1px solid var(--glow-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .editor-title {
+            color: var(--tag-color);
+            font-weight: bold;
+        }
+
+        .editor-body {
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            line-height: 1.4;
+            height: 150px;
+            overflow-y: auto;
+        }
+
+        .code-line {
+            margin-bottom: 5px;
+        }
+
+        .code-comment { color: #6a9955; }
+        .code-keyword { color: #569cd6; }
+        .code-string { color: #ce9178; }
+        .code-function { color: #dcdcaa; }
+        .code-var { color: #9cdcfe; }
+
+        .coding-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 10px;
+        }
+
+        .coding-stat {
+            text-align: center;
+            padding: 8px;
+            background: rgba(0,255,255,0.1);
+            border-radius: 6px;
+            border: 1px solid #00ffff;
+        }
+
+        /* NEW: Seasonal Events Styles */
+        .seasonal-events {
+            background: linear-gradient(135deg, rgba(10,20,40,0.9), rgba(255,215,0,0.2));
+            border: 2px solid var(--glow-color);
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        .event-card {
+            background: rgba(255,215,0,0.1);
+            border: 1px solid #ffd700;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .event-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #ff0000, #ffd700, #00ff00, #00ffff, #0000ff, #ff00ff, #ff0000);
+            background-size: 200% 100%;
+            animation: rainbow 3s linear infinite;
+        }
+
+        @keyframes rainbow {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+        }
+
+        .event-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .event-title {
+            color: #ffd700;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .event-countdown {
+            color: #ff6b6b;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+        }
+
+        .event-progress {
+            height: 8px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .event-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #ff6b6b, #ffd700);
+            border-radius: 4px;
+            width: 45%;
+        }
+
+        .event-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .event-btn {
+            flex: 1;
+            padding: 8px;
+            background: rgba(255,215,0,0.2);
+            border: 1px solid #ffd700;
+            border-radius: 6px;
+            color: var(--text-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .event-btn:hover {
+            background: rgba(255,215,0,0.4);
+            transform: translateY(-2px);
+        }
+
         /* Mobile responsive for new layout */
         @media (max-width: 600px) {
             .typing-container {
@@ -161,6 +531,18 @@
             .anime-img {
                 width: 120px;
                 height: 120px;
+            }
+
+            .xp-actions {
+                grid-template-columns: 1fr;
+            }
+
+            .visitor-stats, .coding-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .event-actions {
+                flex-direction: column;
             }
         }
     </style>
@@ -320,6 +702,164 @@
             </div>
         </div>
 
+        <!-- NEW: XP SYSTEM SECTION -->
+        <div class="section-box" data-aos="fade-up">
+            <h2><span>🏆 XP & Achievement System</span></h2>
+            <div class="xp-system">
+                <div class="xp-header">
+                    <div class="xp-level">Level 7 Developer</div>
+                    <div class="xp-points">1,250/2,000 XP</div>
+                </div>
+                <div class="xp-bar">
+                    <div class="xp-progress"></div>
+                </div>
+                <div class="xp-actions">
+                    <div class="xp-action" onclick="gainXP('visit')">
+                        <strong>🌐 Daily Visit</strong>
+                        <div>+10 XP</div>
+                    </div>
+                    <div class="xp-action" onclick="gainXP('terminal')">
+                        <strong>💻 Use Terminal</strong>
+                        <div>+15 XP</div>
+                    </div>
+                    <div class="xp-action" onclick="gainXP('game')">
+                        <strong>🎮 Play Game</strong>
+                        <div>+25 XP</div>
+                    </div>
+                    <div class="xp-action" onclick="gainXP('social')">
+                        <strong>📱 Share Profile</strong>
+                        <div>+30 XP</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- NEW: VISITOR WORLD MAP SECTION -->
+        <div class="section-box" data-aos="fade-up">
+            <h2><span>🌍 Visitor World Map</span></h2>
+            <div class="visitor-map">
+                <div class="map-container" id="world-map">
+                    <!-- Map points will be generated by JavaScript -->
+                </div>
+                <div class="visitor-stats">
+                    <div class="visitor-stat">
+                        <div class="stat-number" id="countries-count">42</div>
+                        <div class="stat-label">Countries</div>
+                    </div>
+                    <div class="visitor-stat">
+                        <div class="stat-number" id="cities-count">127</div>
+                        <div class="stat-label">Cities</div>
+                    </div>
+                    <div class="visitor-stat">
+                        <div class="stat-number" id="visitors-count">1.5K</div>
+                        <div class="stat-label">Visitors</div>
+                    </div>
+                    <div class="visitor-stat">
+                        <div class="stat-number" id="online-count">24</div>
+                        <div class="stat-label">Online Now</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- NEW: AI CHAT COMPANION SECTION -->
+        <div class="section-box" data-aos="fade-up">
+            <h2><span>🤖 AI Chat Companion</span></h2>
+            <div class="ai-chat">
+                <div class="chat-container" id="chat-container">
+                    <div class="chat-message bot">
+                        <strong>Bow-Bot:</strong> Hey there! I'm Bow-Bot, your AI companion. Ask me about coding, gaming, or just chat! 😊
+                    </div>
+                </div>
+                <div class="chat-input-container">
+                    <input type="text" class="chat-input" id="chat-input" placeholder="Type your message...">
+                    <button class="chat-send" onclick="sendMessage()">Send</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- NEW: LIVE CODING ACTIVITY SECTION -->
+        <div class="section-box" data-aos="fade-up">
+            <h2><span>💻 Live Coding Activity</span></h2>
+            <div class="live-coding">
+                <div class="code-editor">
+                    <div class="editor-header">
+                        <div class="editor-title">script.js • Live</div>
+                        <div class="editor-status">🟢 Coding in progress...</div>
+                    </div>
+                    <div class="editor-body" id="live-code">
+                        <div class="code-line"><span class="code-comment">// Working on new portfolio features</span></div>
+                        <div class="code-line"><span class="code-keyword">function</span> <span class="code-function">addXP</span>(<span class="code-var">points</span>) {</div>
+                        <div class="code-line">&nbsp;&nbsp;<span class="code-keyword">this</span>.<span class="code-var">xp</span> += <span class="code-var">points</span>;</div>
+                        <div class="code-line">&nbsp;&nbsp;<span class="code-keyword">if</span> (<span class="code-keyword">this</span>.<span class="code-var">xp</span> >= <span class="code-keyword">this</span>.<span class="code-var">nextLevelXP</span>) {</div>
+                        <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-function">levelUp</span>();</div>
+                        <div class="code-line">&nbsp;&nbsp;}</div>
+                        <div class="code-line">}</div>
+                        <div class="code-line"></div>
+                        <div class="code-line"><span class="code-comment">// Adding new interactive elements</span></div>
+                        <div class="code-line"><span class="code-keyword">const</span> <span class="code-var">newFeature</span> = <span class="code-string">'XP System'</span>;</div>
+                        <div class="code-line"><span class="code-keyword">console</span>.<span class="code-function">log</span>(<span class="code-string">`Building: ${newFeature}`</span>);</div>
+                    </div>
+                </div>
+                <div class="coding-stats">
+                    <div class="coding-stat">
+                        <div id="lines-today">⌨️ 127</div>
+                        <div>Lines Today</div>
+                    </div>
+                    <div class="coding-stat">
+                        <div id="coding-time">🚀 45min</div>
+                        <div>Coding Time</div>
+                    </div>
+                    <div class="coding-stat">
+                        <div id="bugs-fixed">🐛 3</div>
+                        <div>Bugs Fixed</div>
+                    </div>
+                    <div class="coding-stat">
+                        <div id="features-added">✨ 2</div>
+                        <div>Features Added</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- NEW: SEASONAL EVENTS SECTION -->
+        <div class="section-box" data-aos="fade-up">
+            <h2><span>🎉 Seasonal Events</span></h2>
+            <div class="seasonal-events">
+                <div class="event-card">
+                    <div class="event-header">
+                        <div class="event-title">🎃 Halloween Special</div>
+                        <div class="event-countdown" id="halloween-countdown">27d 12h 45m</div>
+                    </div>
+                    <p>Spooky coding challenges with exclusive rewards! Complete tasks to earn limited-time badges.</p>
+                    <div class="event-progress">
+                        <div class="event-progress-bar"></div>
+                    </div>
+                    <div>Progress: 3/7 Challenges Completed</div>
+                    <div class="event-actions">
+                        <div class="event-btn" onclick="joinEvent('halloween')">Join Event</div>
+                        <div class="event-btn" onclick="viewChallenges('halloween')">View Challenges</div>
+                    </div>
+                </div>
+                
+                <div class="event-card">
+                    <div class="event-header">
+                        <div class="event-title">🎄 Christmas Coding</div>
+                        <div class="event-countdown" id="christmas-countdown">58d 6h 30m</div>
+                    </div>
+                    <p>Festive coding marathon! Build holiday-themed projects and earn special Christmas badges.</p>
+                    <div class="event-progress">
+                        <div class="event-progress-bar" style="width: 20%;"></div>
+                    </div>
+                    <div>Progress: 1/5 Projects Started</div>
+                    <div class="event-actions">
+                        <div class="event-btn" onclick="joinEvent('christmas')">Join Event</div>
+                        <div class="event-btn" onclick="viewChallenges('christmas')">View Projects</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="social-title" data-aos="fade-up"><span>📱 Social Media</span></div>
         <div class="social-container" data-aos="fade-up">
             <a class="social-btn" href="https://instagram.com/bowxlss_" target="_blank" rel="noopener"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" loading="lazy" alt="Instagram"> Instagram</a>
@@ -343,6 +883,107 @@
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js" defer></script>
     <script>
+        // XP System State Management
+        let xpState = {
+            currentXP: 1250,
+            totalXP: 2000,
+            level: 7,
+            actions: {}
+        };
+
+        // Load XP state from localStorage
+        function loadXPState() {
+            const saved = localStorage.getItem('xpState');
+            if (saved) {
+                xpState = JSON.parse(saved);
+            }
+            updateXPDisplay();
+        }
+
+        // Save XP state to localStorage
+        function saveXPState() {
+            localStorage.setItem('xpState', JSON.stringify(xpState));
+        }
+
+        // Update XP display
+        function updateXPDisplay() {
+            const xpLevel = document.querySelector('.xp-level');
+            const xpPoints = document.querySelector('.xp-points');
+            const xpProgress = document.querySelector('.xp-progress');
+
+            if (xpLevel) {
+                xpLevel.textContent = `Level ${xpState.level} Developer`;
+            }
+            if (xpPoints) {
+                xpPoints.textContent = `${xpState.currentXP}/${xpState.totalXP} XP`;
+            }
+            if (xpProgress) {
+                const percentage = (xpState.currentXP / xpState.totalXP) * 100;
+                xpProgress.style.width = `${percentage}%`;
+            }
+        }
+
+        // NEW: FIXED XP System Functionality
+        function gainXP(action) {
+            const xpValues = {
+                'visit': 10,
+                'terminal': 15,
+                'game': 25,
+                'social': 30
+            };
+
+            const points = xpValues[action];
+            if (!points) return;
+
+            // Check if action was already performed today
+            const today = new Date().toDateString();
+            if (xpState.actions[action] === today) {
+                showNotification(`You already earned XP for ${action} today!`, 'info');
+                return;
+            }
+
+            // Add XP
+            xpState.currentXP += points;
+            xpState.actions[action] = today;
+
+            // Check for level up
+            if (xpState.currentXP >= xpState.totalXP) {
+                xpState.level++;
+                xpState.currentXP = xpState.currentXP - xpState.totalXP;
+                xpState.totalXP = Math.floor(xpState.totalXP * 1.2); // Increase next level requirement
+                showNotification(`🎉 Level Up! You are now Level ${xpState.level}`, 'success');
+            }
+
+            // Update display and save
+            updateXPDisplay();
+            saveXPState();
+            showNotification(`+${points} XP gained for ${action}!`, 'success');
+
+            // Visual feedback
+            const xpProgress = document.querySelector('.xp-progress');
+            if (xpProgress) {
+                xpProgress.style.transition = 'width 0.5s ease';
+                setTimeout(() => {
+                    xpProgress.style.transition = 'width 2s ease-in-out';
+                }, 500);
+            }
+        }
+
+        // NEW: Auto-gain XP for terminal usage
+        function setupXPTracking() {
+            const originalProcessCommand = TerminalGame.prototype.processCommand;
+            TerminalGame.prototype.processCommand = function(cmd) {
+                const result = originalProcessCommand.call(this, cmd);
+                
+                // Award XP for terminal usage (excluding help and clear commands)
+                if (!cmd.includes('help') && !cmd.includes('clear')) {
+                    setTimeout(() => gainXP('terminal'), 100);
+                }
+                
+                return result;
+            };
+        }
+
         // TERMINAL GAME ENGINE - UPDATED WITH 7 NEW GAMES
         class TerminalGame {
             constructor() {
@@ -398,8 +1039,8 @@
                     input.focus();
                 });
                 
-                // Auto focus pada load
-                setTimeout(() => input.focus(), 1000);
+                // HAPUS: Auto focus pada load - Ini penyebab masalah scroll
+                // setTimeout(() => input.focus(), 1000);
             }
             
             processCommand(cmd) {
@@ -421,6 +1062,8 @@
                     this.commands[mainCmd](args.slice(1));
                 } else if (this.games[mainCmd]) {
                     this.games[mainCmd](args.slice(1));
+                    // Auto gain XP when starting games
+                    gainXP('game');
                 } else {
                     this.addLine(`Command not found: ${mainCmd}. Type 'help' for available commands.`, 'error');
                 }
@@ -1195,6 +1838,215 @@
             }
         }
 
+        // NEW: Visitor Map Functionality
+        function initializeVisitorMap() {
+            const mapContainer = document.getElementById('world-map');
+            const points = 15;
+            
+            for (let i = 0; i < points; i++) {
+                const point = document.createElement('div');
+                point.className = 'map-point';
+                point.style.left = Math.random() * 90 + 5 + '%';
+                point.style.top = Math.random() * 85 + 5 + '%';
+                point.style.animationDelay = (Math.random() * 2) + 's';
+                mapContainer.appendChild(point);
+            }
+        }
+
+        // NEW: Visitor Stats Counter
+        function updateVisitorStats() {
+            // Generate realistic visitor data
+            const countries = Math.floor(Math.random() * 10) + 42; // 42-51 countries
+            const cities = Math.floor(Math.random() * 20) + 120; // 120-139 cities
+            const visitors = Math.floor(Math.random() * 500) + 1500; // 1500-1999 visitors
+            const online = Math.floor(Math.random() * 10) + 20; // 20-29 online
+            
+            // Update the display with animated counters
+            animateCounter('countries-count', countries);
+            animateCounter('cities-count', cities);
+            animateCounter('visitors-count', visitors);
+            animateCounter('online-count', online);
+        }
+
+        // NEW: Live Coding Stats Update
+        function updateLiveCodingStats() {
+            // Generate realistic coding activity data
+            const linesToday = Math.floor(Math.random() * 50) + 100; // 100-149 lines
+            const codingTime = Math.floor(Math.random() * 60) + 30; // 30-89 minutes
+            const bugsFixed = Math.floor(Math.random() * 3) + 1; // 1-3 bugs
+            const featuresAdded = Math.floor(Math.random() * 2) + 1; // 1-2 features
+            
+            // Update the display
+            document.getElementById('lines-today').innerHTML = `⌨️ ${linesToday}`;
+            document.getElementById('coding-time').innerHTML = `🚀 ${codingTime}min`;
+            document.getElementById('bugs-fixed').innerHTML = `🐛 ${bugsFixed}`;
+            document.getElementById('features-added').innerHTML = `✨ ${featuresAdded}`;
+        }
+
+        // Counter animation function
+        function animateCounter(elementId, target) {
+            const element = document.getElementById(elementId);
+            const current = parseInt(element.textContent) || 0;
+            const increment = Math.ceil((target - current) / 20);
+            let currentValue = current;
+            
+            const timer = setInterval(() => {
+                currentValue += increment;
+                
+                // Format numbers with commas for thousands
+                if (target > 1000) {
+                    element.textContent = Math.min(currentValue, target).toLocaleString();
+                } else {
+                    element.textContent = Math.min(currentValue, target);
+                }
+                
+                if (currentValue >= target) {
+                    clearInterval(timer);
+                    element.textContent = target > 1000 ? target.toLocaleString() : target;
+                }
+            }, 50);
+        }
+
+        // NEW: AI Chat Functionality
+        function sendMessage() {
+            const input = document.getElementById('chat-input');
+            const message = input.value.trim();
+            
+            if (message) {
+                // Add user message
+                addChatMessage(message, 'user');
+                input.value = '';
+                
+                // Simulate AI response delay
+                setTimeout(() => {
+                    const response = generateAIResponse(message);
+                    addChatMessage(response, 'bot');
+                }, 1000 + Math.random() * 2000);
+            }
+        }
+
+        function addChatMessage(text, sender) {
+            const container = document.getElementById('chat-container');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `chat-message ${sender}`;
+            
+            if (sender === 'bot') {
+                messageDiv.innerHTML = `<strong>Bow-Bot:</strong> ${text}`;
+            } else {
+                messageDiv.innerHTML = `<strong>You:</strong> ${text}`;
+            }
+            
+            container.appendChild(messageDiv);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function generateAIResponse(message) {
+            const lowerMessage = message.toLowerCase();
+            const responses = {
+                greeting: ["Hey there! 👋", "Hello! How can I help you today?", "Hi! Nice to see you!"],
+                coding: ["Coding is awesome! What language are you learning?", "I love talking about programming! 🚀", "Web development is so much fun!"],
+                gaming: ["Gaming is the best way to relax! 🎮", "What games are you playing lately?", "I'm a big fan of chill gaming sessions"],
+                default: ["That's interesting! Tell me more.", "I see... what do you think about that?", "Cool! Want to talk about something else?"]
+            };
+            
+            if (lowerMessage.includes('hi') || lowerMessage.includes('hello') || lowerMessage.includes('hey')) {
+                return responses.greeting[Math.floor(Math.random() * responses.greeting.length)];
+            } else if (lowerMessage.includes('code') || lowerMessage.includes('program') || lowerMessage.includes('html') || lowerMessage.includes('css') || lowerMessage.includes('js')) {
+                return responses.coding[Math.floor(Math.random() * responses.coding.length)];
+            } else if (lowerMessage.includes('game') || lowerMessage.includes('play') || lowerMessage.includes('gta') || lowerMessage.includes('samp')) {
+                return responses.gaming[Math.floor(Math.random() * responses.gaming.length)];
+            } else {
+                return responses.default[Math.floor(Math.random() * responses.default.length)];
+            }
+        }
+
+        // NEW: Live Coding Animation
+        function animateLiveCoding() {
+            const codeEditor = document.getElementById('live-code');
+            const lines = codeEditor.innerHTML;
+            
+            // Simulate typing effect occasionally
+            if (Math.random() > 0.7) {
+                codeEditor.style.animation = 'none';
+                setTimeout(() => {
+                    codeEditor.style.animation = 'typing 0.5s ease-in-out';
+                }, 10);
+            }
+        }
+
+        // NEW: Seasonal Events Countdown
+        function updateCountdowns() {
+            const now = new Date();
+            
+            // Halloween countdown (October 31)
+            const halloween = new Date(now.getFullYear(), 9, 31);
+            if (now > halloween) {
+                halloween.setFullYear(halloween.getFullYear() + 1);
+            }
+            const halloweenDiff = halloween - now;
+            
+            // Christmas countdown (December 25)
+            const christmas = new Date(now.getFullYear(), 11, 25);
+            if (now > christmas) {
+                christmas.setFullYear(christmas.getFullYear() + 1);
+            }
+            const christmasDiff = christmas - now;
+            
+            document.getElementById('halloween-countdown').textContent = formatCountdown(halloweenDiff);
+            document.getElementById('christmas-countdown').textContent = formatCountdown(christmasDiff);
+        }
+
+        function formatCountdown(diff) {
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            return `${days}d ${hours}h ${minutes}m`;
+        }
+
+        // NEW: Event Join Functions
+        function joinEvent(event) {
+            showNotification(`Joined ${event} event! 🎉`, 'success');
+        }
+
+        function viewChallenges(event) {
+            showNotification(`Opening ${event} challenges...`, 'info');
+        }
+
+        // Utility function for notifications
+        function showNotification(message, type) {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                padding: 15px 20px;
+                background: ${type === 'success' ? 'rgba(34,197,94,0.9)' : 'rgba(59,130,246,0.9)'};
+                color: white;
+                border-radius: 8px;
+                z-index: 10000;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+                transform: translateX(100%);
+                transition: transform 0.3s ease;
+            `;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            // Animate in
+            setTimeout(() => {
+                notification.style.transform = 'translateX(0)';
+            }, 100);
+            
+            // Animate out and remove
+            setTimeout(() => {
+                notification.style.transform = 'translateX(100%)';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 3000);
+        }
+
         document.addEventListener("DOMContentLoaded",function(){
             // Initialize AOS
             AOS.init({duration:800,once:true,disable:'mobile'});
@@ -1202,6 +2054,12 @@
             // Optimize particles for performance
             const isMobile = window.innerWidth <= 600;
             particlesJS('particles-js',{particles:{number:{value:isMobile?30:60},color:{value:"#ff00ff"},shape:{type:"circle"},opacity:{value:.6,random:true},size:{value:2,random:true},line_linked:{enable:false},move:{enable:true,speed:.4}}});
+            
+            // Initialize XP System
+            loadXPState();
+            
+            // Setup XP tracking for terminal
+            setupXPTracking();
             
             // Initialize Terminal Game
             const terminalGame = new TerminalGame();
@@ -1365,6 +2223,25 @@ Outside of gaming, I'm currently exploring coding and web development. This webs
                 observer.observe(statsSection);
             }
             
+            // NEW: Initialize additional features
+            initializeVisitorMap();
+            updateVisitorStats(); // Initialize visitor stats with animated counters
+            updateLiveCodingStats(); // Initialize live coding stats
+            updateCountdowns();
+            
+            // Set up intervals for dynamic content
+            setInterval(updateCountdowns, 60000); // Update countdown every minute
+            setInterval(animateLiveCoding, 5000); // Animate coding every 5 seconds
+            setInterval(updateVisitorStats, 30000); // Update visitor stats every 30 seconds
+            setInterval(updateLiveCodingStats, 15000); // Update coding stats every 15 seconds
+            
+            // Chat input enter key support
+            document.getElementById('chat-input').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+
             // Hide loading screen when page is fully loaded and start typing
             window.addEventListener('load', () => {
                 setTimeout(() => {
@@ -1373,6 +2250,8 @@ Outside of gaming, I'm currently exploring coding and web development. This webs
                         document.getElementById('loading').style.display = 'none';
                         // Start typing animation after loading is complete
                         typeWriter();
+                        // PERBAIKAN: Scroll ke atas setelah loading selesai
+                        window.scrollTo(0, 0);
                     }, 500);
                 }, 1000);
             });
