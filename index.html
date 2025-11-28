@@ -172,16 +172,16 @@
             </div>
         </div>
 
-        <!-- XP SYSTEM SECTION -->
+        <!-- XP SYSTEM SECTION - FIXED: Remove hardcoded values -->
         <div class="section-box" data-aos="fade-up">
             <h2><span>🏆 XP & Achievement System</span></h2>
             <div class="xp-system">
                 <div class="xp-header">
-                    <div class="xp-level">Level 7 Developer</div>
-                    <div class="xp-points">1,250/2,000 XP</div>
+                    <div class="xp-level">Loading...</div>
+                    <div class="xp-points">Loading...</div>
                 </div>
                 <div class="xp-bar">
-                    <div class="xp-progress"></div>
+                    <div class="xp-progress" style="width: 0%;"></div>
                 </div>
                 <div class="xp-actions">
                     <div class="xp-action" onclick="gainXP('visit')">
@@ -200,6 +200,12 @@
                         <strong>📱 Share Profile</strong>
                         <div>+30 XP</div>
                     </div>
+                </div>
+                <!-- Reset button for testing -->
+                <div style="text-align: center; margin-top: 15px;">
+                    <button onclick="resetXP()" style="background: rgba(255,0,0,0.2); color: #ff6b6b; border: 1px solid #ff6b6b; padding: 5px 10px; border-radius: 5px; cursor: pointer; font-size: 0.8em;">
+                        Reset XP (Testing)
+                    </button>
                 </div>
             </div>
         </div>
