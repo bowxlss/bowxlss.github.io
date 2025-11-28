@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
     <!-- External CSS -->
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="components.css">
 </head>
 <body>
     <!-- Loading Animation -->
@@ -19,7 +20,7 @@
     </div>
 
     <!-- Video Background - Optimized -->
-    <video id="video-bg" autoplay loop muted playsinline preload="auto" poster="video-poster.jpg">
+    <video id="video-bg" autoplay loop muted playsinline preload="auto">
         <source src="bg-video.mp4" type="video/mp4">
     </video>
 
@@ -43,35 +44,35 @@
             <h2><span>💻 My Projects</span></h2>
             <div class="project-grid">
                 <div class="project-item">
-                    <img src="images/personal-website.png" alt="Personal Website" loading="lazy">
+                    <img src="images/personal-website.png" alt="Personal Website" loading="lazy" onerror="this.style.display='none'">
                     <div class="project-content">
                         <h3>Personal Website</h3>
                         <p>Dark-themed neon site built with HTML, CSS, JS + particles & AOS.</p>
                     </div>
                 </div>
                 <div class="project-item">
-                    <img src="images/samp-script.jpg" alt="SAMP Script" loading="lazy">
+                    <img src="images/samp-script.jpg" alt="SAMP Script" loading="lazy" onerror="this.style.display='none'">
                     <div class="project-content">
                         <h3>SAMP Script Collection</h3>
                         <p>Fun GTA SA multiplayer scripts: NPCs, mini-games & interactive triggers.</p>
                     </div>
                 </div>
                 <div class="project-item">
-                    <img src="images/anime-tracker.jpg" alt="Anime Tracker" loading="lazy">
+                    <img src="images/anime-tracker.jpg" alt="Anime Tracker" loading="lazy" onerror="this.style.display='none'">
                     <div class="project-content">
                         <h3>Anime Tracker Web App</h3>
                         <p>Prototype to track anime episodes & progress with JS & local storage.</p>
                     </div>
                 </div>
                 <div class="project-item">
-                    <img src="images/chill-mods.jpg" alt="Chill Mods" loading="lazy">
+                    <img src="images/chill-mods.jpg" alt="Chill Mods" loading="lazy" onerror="this.style.display='none'">
                     <div class="project-content">
                         <h3>Chill Game Mods</h3>
                         <p>Minor mods in single-player games to learn logic & programming.</p>
                     </div>
                 </div>
                 <div class="project-item">
-                    <img src="images/mini-js-games.jpg" alt="Mini JS Games" loading="lazy">
+                    <img src="images/mini-js-games.jpg" alt="Mini JS Games" loading="lazy" onerror="this.style.display='none'">
                     <div class="project-content">
                         <h3>Mini JS Games</h3>
                         <p>Small browser-based games: clickers, puzzles & interactive fun.</p>
@@ -197,90 +198,8 @@
         <span>© 2025 Bowxlss. All rights reserved. ✨</span>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js" defer></script>
-    <script>
-        document.addEventListener("DOMContentLoaded",function(){
-            // Initialize AOS
-            AOS.init({duration:800,once:true,disable:'mobile'});
-            
-            // Optimize particles for performance
-            const isMobile = window.innerWidth <= 600;
-            particlesJS('particles-js',{particles:{number:{value:isMobile?30:60},color:{value:"#ff00ff"},shape:{type:"circle"},opacity:{value:.6,random:true},size:{value:2,random:true},line_linked:{enable:false},move:{enable:true,speed:.4}}});
-            
-            // Improved Theme Toggle with Smooth Transition & Local Storage
-            const themeToggle = document.getElementById('theme-toggle');
-            const themeIcon = themeToggle.querySelector('.theme-icon');
-            
-            // Load saved theme
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme === 'light') {
-                document.body.classList.add('light');
-                themeIcon.textContent = '☀️';
-            }
-            
-            themeToggle.addEventListener('click',()=>{
-                document.body.style.transition = 'all 0.5s ease';
-                document.body.classList.toggle('light');
-                
-                // Update icon
-                themeIcon.textContent = document.body.classList.contains('light') ? '☀️' : '🌙';
-                
-                // Save preference
-                localStorage.setItem('theme', document.body.classList.contains('light') ? 'light' : 'dark');
-            });
-            
-            // GANTI bagian optimize video playback dengan ini:
-const video = document.getElementById('video-bg');
-if(video){
-    // Untuk mobile, set playback rate lebih rendah dan mute
-    if(isMobile){
-        video.playbackRate = 0.8; // Lebih lambat untuk menghemat baterai
-        video.muted = true; // Pastikan tetap muted
-        video.setAttribute('playsinline', ''); // Penting untuk iOS
-        video.setAttribute('webkit-playsinline', ''); // Untuk Safari iOS
-    } else {
-        video.playbackRate = 1;
-    }
-    
-    // Reduce quality on slower connections
-    if(navigator.connection && (navigator.connection.effectiveType === '2g' || navigator.connection.saveData)){
-        video.style.display = 'none';
-    }
-}
-            
-            // Back to Top Button
-            const backToTopBtn = document.getElementById('back-to-top');
-            window.addEventListener('scroll', () => {
-                if (window.pageYOffset > 300) {
-                    backToTopBtn.style.display = 'block';
-                } else {
-                    backToTopBtn.style.display = 'none';
-                }
-            });
-            
-            backToTopBtn.addEventListener('click', () => {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
-            
-            // Hide loading screen when page is fully loaded
-            window.addEventListener('load', () => {
-                setTimeout(() => {
-                    document.getElementById('loading').style.opacity = '0';
-                    setTimeout(() => {
-                        document.getElementById('loading').style.display = 'none';
-                    }, 500);
-                }, 1000);
-            });
-            
-            // Mobile optimizations
-            if (isMobile) {
-                // Reduce animations for better performance
-                document.body.style.setProperty('--animation-duration', '0.5s');
-            }
-        });
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>
-
-
