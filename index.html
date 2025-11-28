@@ -1221,7 +1221,7 @@
             openModal(title, content);
         }
 
-        // TERMINAL GAME ENGINE - UPDATED WITH FIX FOR MOBILE
+        // TERMINAL GAME ENGINE - FIXED MOBILE FOCUS ISSUE
         class TerminalGame {
             constructor() {
                 this.commands = {
@@ -1264,36 +1264,48 @@
                 const input = document.getElementById('terminal-input');
                 const output = document.getElementById('terminal-output');
                 
-                // FIXED: Event listener yang lebih kompatibel untuk mobile dengan pencegahan event bubbling
+                // FIXED: Better mobile focus handling
                 input.addEventListener('keydown', (e) => {
                     if (e.key === 'Enter') {
-                        e.preventDefault(); // Mencegah form submission dan scroll
-                        e.stopPropagation(); // Mencegah event bubbling
+                        e.preventDefault();
+                        e.stopPropagation();
                         this.processCommand(input.value);
                         input.value = '';
                         
-                        // FIXED: Tetap fokus pada input setelah Enter dengan delay yang lebih baik
+                        // FIXED: Improved focus handling for mobile
                         setTimeout(() => {
                             input.focus();
-                            // Scroll ke input untuk memastikan terlihat di mobile
-                            input.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            // Prevent focus from jumping to other inputs
+                            document.getElementById('chat-input').blur();
                         }, 50);
                     }
                 });
                 
-                // Focus input ketika terminal diklik
+                // Focus input when terminal is clicked - FIXED for mobile
                 document.querySelector('.terminal').addEventListener('click', (e) => {
-                    e.stopPropagation(); // Mencegah event bubbling
+                    e.stopPropagation();
                     input.focus();
+                    // Prevent focus from jumping to other inputs
+                    document.getElementById('chat-input').blur();
                 });
 
-                // FIXED: Mencegah event bubbling dari terminal container
+                // FIXED: Better touch handling for mobile
                 document.querySelector('.terminal').addEventListener('touchstart', (e) => {
                     e.stopPropagation();
                 });
 
                 document.querySelector('.terminal').addEventListener('touchend', (e) => {
                     e.stopPropagation();
+                    input.focus();
+                    document.getElementById('chat-input').blur();
+                });
+
+                // FIXED: Prevent focus stealing by other elements
+                document.addEventListener('focusin', (e) => {
+                    if (e.target.id === 'chat-input') {
+                        // If chat input gets focus, blur terminal input
+                        input.blur();
+                    }
                 });
             }
             
