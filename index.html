@@ -791,7 +791,7 @@
                     </div>
                     <div class="terminal-input-line">
                         <span class="prompt">visitor@bowxlss-portfolio:~$ </span>
-                        <input type="text" id="terminal-input" autocomplete="off" spellcheck="false">
+                        <input type="text" id="terminal-input" autocomplete="off" autocorrect="off" spellcheck="false">
                     </div>
                 </div>
             </div>
@@ -1221,7 +1221,7 @@
             openModal(title, content);
         }
 
-        // TERMINAL GAME ENGINE - UPDATED WITH 7 NEW GAMES
+        // TERMINAL GAME ENGINE - UPDATED WITH FIX FOR MOBILE
         class TerminalGame {
             constructor() {
                 this.commands = {
@@ -1264,23 +1264,36 @@
                 const input = document.getElementById('terminal-input');
                 const output = document.getElementById('terminal-output');
                 
-                // PERBAIKAN: Event listener yang lebih kompatibel untuk mobile
+                // FIXED: Event listener yang lebih kompatibel untuk mobile dengan pencegahan event bubbling
                 input.addEventListener('keydown', (e) => {
                     if (e.key === 'Enter') {
                         e.preventDefault(); // Mencegah form submission dan scroll
+                        e.stopPropagation(); // Mencegah event bubbling
                         this.processCommand(input.value);
                         input.value = '';
                         
-                        // PERBAIKAN: Tetap fokus pada input setelah Enter
+                        // FIXED: Tetap fokus pada input setelah Enter dengan delay yang lebih baik
                         setTimeout(() => {
                             input.focus();
-                        }, 10);
+                            // Scroll ke input untuk memastikan terlihat di mobile
+                            input.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }, 50);
                     }
                 });
                 
                 // Focus input ketika terminal diklik
-                document.querySelector('.terminal').addEventListener('click', () => {
+                document.querySelector('.terminal').addEventListener('click', (e) => {
+                    e.stopPropagation(); // Mencegah event bubbling
                     input.focus();
+                });
+
+                // FIXED: Mencegah event bubbling dari terminal container
+                document.querySelector('.terminal').addEventListener('touchstart', (e) => {
+                    e.stopPropagation();
+                });
+
+                document.querySelector('.terminal').addEventListener('touchend', (e) => {
+                    e.stopPropagation();
                 });
             }
             
