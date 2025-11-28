@@ -1,3 +1,5 @@
+[file name]: components.css
+[file content begin]
 /* components.css - Styles for interactive components */
 
 /* Typing Animation Styles */
@@ -803,7 +805,9 @@
         padding: 15px;
     }
     
+    /* PERUBAHAN: Memperbesar ukuran terminal untuk mobile */
     .terminal-body {
-        height: 250px;
+        height: 320px; /* Diperbesar dari 250px menjadi 320px */
+        padding: 15px; /* Diperbesar dari 10px menjadi 15px */
     }
 }
