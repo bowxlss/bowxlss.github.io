@@ -1027,10 +1027,17 @@
                 const input = document.getElementById('terminal-input');
                 const output = document.getElementById('terminal-output');
                 
-                input.addEventListener('keypress', (e) => {
+                // PERBAIKAN: Event listener yang lebih kompatibel untuk mobile
+                input.addEventListener('keydown', (e) => {
                     if (e.key === 'Enter') {
+                        e.preventDefault(); // Mencegah form submission dan scroll
                         this.processCommand(input.value);
                         input.value = '';
+                        
+                        // PERBAIKAN: Tetap fokus pada input setelah Enter
+                        setTimeout(() => {
+                            input.focus();
+                        }, 10);
                     }
                 });
                 
@@ -1038,9 +1045,6 @@
                 document.querySelector('.terminal').addEventListener('click', () => {
                     input.focus();
                 });
-                
-                // HAPUS: Auto focus pada load - Ini penyebab masalah scroll
-                // setTimeout(() => input.focus(), 1000);
             }
             
             processCommand(cmd) {
