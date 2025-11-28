@@ -496,6 +496,119 @@
             transform: translateY(-2px);
         }
 
+        /* NEW: Modal for Challenges and Projects */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, rgba(10,20,40,0.95), rgba(255,215,0,0.1));
+            border: 2px solid #ffd700;
+            border-radius: 15px;
+            padding: 25px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 0 30px rgba(255,215,0,0.5);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(255,215,0,0.3);
+            padding-bottom: 10px;
+        }
+
+        .modal-title {
+            color: #ffd700;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: #ffd700;
+            font-size: 1.5em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .close-btn:hover {
+            color: #ff6b6b;
+            transform: scale(1.1);
+        }
+
+        .challenge-list, .project-list {
+            margin: 15px 0;
+        }
+
+        .challenge-item, .project-item {
+            background: rgba(255,215,0,0.1);
+            border: 1px solid rgba(255,215,0,0.3);
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .challenge-item:hover, .project-item:hover {
+            background: rgba(255,215,0,0.2);
+            transform: translateX(5px);
+        }
+
+        .challenge-item h4, .project-item h4 {
+            color: #ffd700;
+            margin: 0 0 8px 0;
+            font-size: 1.1em;
+        }
+
+        .challenge-item p, .project-item p {
+            margin: 0;
+            color: var(--text-color);
+            font-size: 0.95em;
+        }
+
+        .challenge-status, .project-status {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            margin-top: 8px;
+        }
+
+        .status-completed {
+            background: rgba(0,255,0,0.2);
+            color: #00ff00;
+            border: 1px solid #00ff00;
+        }
+
+        .status-in-progress {
+            background: rgba(255,215,0,0.2);
+            color: #ffd700;
+            border: 1px solid #ffd700;
+        }
+
+        .status-not-started {
+            background: rgba(255,0,0,0.2);
+            color: #ff6b6b;
+            border: 1px solid #ff6b6b;
+        }
+
         /* Mobile responsive for new layout */
         @media (max-width: 600px) {
             .typing-container {
@@ -543,6 +656,11 @@
 
             .event-actions {
                 flex-direction: column;
+            }
+
+            .modal-content {
+                width: 95%;
+                padding: 15px;
             }
         }
     </style>
@@ -871,6 +989,19 @@
         </div>
     </div>
 
+    <!-- NEW: Modal for Challenges and Projects -->
+    <div id="challenges-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modal-title">Challenges</h3>
+                <button class="close-btn" onclick="closeModal()">×</button>
+            </div>
+            <div id="modal-content">
+                <!-- Content will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
     <div class="footer" data-aos="fade-up">
         <span>© 2025 Bowxlss. All rights reserved. ✨</span>
         <div class="footer-icons">
@@ -883,6 +1014,25 @@
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js" defer></script>
     <script>
+        // NEW: Modal Functions
+        function openModal(title, content) {
+            document.getElementById('modal-title').textContent = title;
+            document.getElementById('modal-content').innerHTML = content;
+            document.getElementById('challenges-modal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('challenges-modal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('challenges-modal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+
         // XP System State Management
         let xpState = {
             currentXP: 1250,
@@ -982,6 +1132,93 @@
                 
                 return result;
             };
+        }
+
+        // NEW: FIXED Event Functions
+        function joinEvent(event) {
+            showNotification(`Joined ${event} event! 🎉`, 'success');
+            gainXP('game'); // Award XP for joining events
+        }
+
+        function viewChallenges(event) {
+            let title = '';
+            let content = '';
+            
+            if (event === 'halloween') {
+                title = '🎃 Halloween Challenges';
+                content = `
+                    <div class="challenge-list">
+                        <div class="challenge-item">
+                            <h4>Spooky CSS Animation</h4>
+                            <p>Create a Halloween-themed CSS animation with ghosts, pumpkins, or bats.</p>
+                            <span class="challenge-status status-completed">Completed</span>
+                        </div>
+                        <div class="challenge-item">
+                            <h4>Ghostly JavaScript Game</h4>
+                            <p>Build a mini-game where players catch ghosts in a haunted house.</p>
+                            <span class="challenge-status status-in-progress">In Progress</span>
+                        </div>
+                        <div class="challenge-item">
+                            <h4>Dark Mode Toggle</h4>
+                            <p>Implement a spooky dark mode theme for your website.</p>
+                            <span class="challenge-status status-completed">Completed</span>
+                        </div>
+                        <div class="challenge-item">
+                            <h4>Trick-or-Treat Simulator</h4>
+                            <p>Create a fun simulator where users can go trick-or-treating.</p>
+                            <span class="challenge-status status-not-started">Not Started</span>
+                        </div>
+                        <div class="challenge-item">
+                            <h4>Pumpkin Carving App</h4>
+                            <p>Build a virtual pumpkin carving application with creative tools.</p>
+                            <span class="challenge-status status-not-started">Not Started</span>
+                        </div>
+                        <div class="challenge-item">
+                            <h4>Haunted House Website</h4>
+                            <p>Design and develop a website for a fictional haunted house attraction.</p>
+                            <span class="challenge-status status-not-started">Not Started</span>
+                        </div>
+                        <div class="challenge-item">
+                            <h4>Monster Mash Music Player</h4>
+                            <p>Create a Halloween-themed music player with spooky sound effects.</p>
+                            <span class="challenge-status status-completed">Completed</span>
+                        </div>
+                    </div>
+                `;
+            } else if (event === 'christmas') {
+                title = '🎄 Christmas Projects';
+                content = `
+                    <div class="project-list">
+                        <div class="project-item">
+                            <h4>Christmas Countdown Timer</h4>
+                            <p>Build an interactive countdown timer showing days until Christmas.</p>
+                            <span class="project-status status-in-progress">In Progress</span>
+                        </div>
+                        <div class="project-item">
+                            <h4>Snow Animation with CSS/JS</h4>
+                            <p>Create realistic falling snow animation for your website.</p>
+                            <span class="project-status status-not-started">Not Started</span>
+                        </div>
+                        <div class="project-item">
+                            <h4>Gift Exchange App</h4>
+                            <p>Develop an app that helps organize gift exchanges among friends.</p>
+                            <span class="project-status status-not-started">Not Started</span>
+                        </div>
+                        <div class="project-item">
+                            <h4>Holiday Card Generator</h4>
+                            <p>Build a customizable digital holiday greeting card generator.</p>
+                            <span class="project-status status-not-started">Not Started</span>
+                        </div>
+                        <div class="project-item">
+                            <h4>Santa's Sleigh Game</h4>
+                            <p>Create a fun game where players guide Santa's sleigh to deliver presents.</p>
+                            <span class="project-status status-not-started">Not Started</span>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            openModal(title, content);
         }
 
         // TERMINAL GAME ENGINE - UPDATED WITH 7 NEW GAMES
@@ -2005,15 +2242,6 @@
             const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
             return `${days}d ${hours}h ${minutes}m`;
-        }
-
-        // NEW: Event Join Functions
-        function joinEvent(event) {
-            showNotification(`Joined ${event} event! 🎉`, 'success');
-        }
-
-        function viewChallenges(event) {
-            showNotification(`Opening ${event} challenges...`, 'info');
         }
 
         // Utility function for notifications
