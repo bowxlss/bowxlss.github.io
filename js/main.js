@@ -185,6 +185,240 @@ function initializeSkillAnimation() {
     });
 }
 
+// GitHub API Integration
+function initializeGitHubIntegration() {
+    // Only run on second.html
+    if (!document.getElementById('public-repos')) return;
+    
+    loadGitHubStats();
+    loadGitHubRepos();
+}
+
+function loadGitHubStats() {
+    const publicReposEl = document.getElementById('public-repos');
+    const followersEl = document.getElementById('followers');
+    const followingEl = document.getElementById('following');
+    const totalStarsEl = document.getElementById('total-stars');
+    
+    // Show loading state
+    [publicReposEl, followersEl, followingEl, totalStarsEl].forEach(el => {
+        if (el) el.innerHTML = '<span class="github-loading"></span>';
+    });
+    
+    fetch('https://api.github.com/users/bowxlss')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`GitHub API error: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(userData => {
+            // Update user stats
+            if (publicReposEl) publicReposEl.textContent = userData.public_repos || 0;
+            if (followersEl) followersEl.textContent = userData.followers || 0;
+            if (followingEl) followingEl.textContent = userData.following || 0;
+            
+            // Load repositories to calculate total stars
+            return fetch('https://api.github.com/users/bowxlss/repos?per_page=100');
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`GitHub API error: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(repos => {
+            // Calculate total stars
+            const totalStars = repos.reduce((sum, repo) => sum + (repo.stargazers_count || 0), 0);
+            if (totalStarsEl) totalStarsEl.textContent = totalStars;
+            
+            // Update coding activity stats
+            updateCodingActivityStats();
+        })
+        .catch(error => {
+            console.error('Error loading GitHub stats:', error);
+            handleGitHubError(error);
+        });
+}
+
+function loadGitHubRepos() {
+    const reposListEl = document.getElementById('github-repos-list');
+    const statusEl = document.getElementById('github-repos-status');
+    
+    if (!reposListEl || !statusEl) return;
+    
+    // Show loading state
+    reposListEl.innerHTML = '';
+    statusEl.textContent = 'Loading repositories...';
+    statusEl.style.display = 'block';
+    
+    fetch('https://api.github.com/users/bowxlss/repos?sort=updated&direction=desc&per_page=6')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`GitHub API error: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(repos => {
+            statusEl.style.display = 'none';
+            
+            if (repos.length === 0) {
+                reposListEl.innerHTML = '<div class="github-error">No repositories found.</div>';
+                return;
+            }
+            
+            // Display repositories
+            reposListEl.innerHTML = repos.map(repo => `
+                <div class="github-repo-item">
+                    <div class="repo-header">
+                        <h3 class="repo-name">
+                            <a href="${repo.html_url}" target="_blank">${repo.name}</a>
+                        </h3>
+                        <div class="repo-stats">
+                            <div class="repo-stat" title="Stars">
+                                <i class="fas fa-star"></i> ${repo.stargazers_count || 0}
+                            </div>
+                            <div class="repo-stat" title="Forks">
+                                <i class="fas fa-code-branch"></i> ${repo.forks_count || 0}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="repo-description">
+                        ${repo.description || 'No description provided.'}
+                    </div>
+                    <div class="repo-meta">
+                        <div class="repo-language">
+                            ${repo.language ? `
+                                <span class="language-color" style="background-color: ${getLanguageColor(repo.language)}"></span>
+                                ${repo.language}
+                            ` : ''}
+                        </div>
+                        <div class="repo-updated">
+                            Updated ${formatDate(repo.updated_at)}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        })
+        .catch(error => {
+            console.error('Error loading GitHub repositories:', error);
+            statusEl.style.display = 'block';
+            statusEl.innerHTML = `<div class="github-error">Failed to load repositories: ${error.message}</div>`;
+        });
+}
+
+function updateCodingActivityStats() {
+    const totalCommitsEl = document.getElementById('total-commits');
+    const lastActiveEl = document.getElementById('last-active');
+    const accountAgeEl = document.getElementById('account-age');
+    
+    if (!totalCommitsEl || !lastActiveEl || !accountAgeEl) return;
+    
+    // For now, we'll use placeholder values as GitHub API doesn't provide easy access to total commits
+    // In a real implementation, you might use the GitHub Events API or a third-party service
+    fetch('https://api.github.com/users/bowxlss/events?per_page=100')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`GitHub API error: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(events => {
+            // Calculate approximate commit count (this is a rough estimate)
+            const pushEvents = events.filter(event => event.type === 'PushEvent');
+            const commitCount = pushEvents.reduce((sum, event) => sum + (event.payload.size || 0), 0);
+            
+            if (totalCommitsEl) totalCommitsEl.textContent = commitCount > 0 ? commitCount : 'N/A';
+            
+            // Get last active date
+            if (events.length > 0 && lastActiveEl) {
+                const lastEvent = events[0];
+                lastActiveEl.textContent = formatDate(lastEvent.created_at, true);
+            }
+        })
+        .catch(error => {
+            console.error('Error loading GitHub activity:', error);
+            if (totalCommitsEl) totalCommitsEl.textContent = 'N/A';
+        });
+    
+    // Get account creation date
+    fetch('https://api.github.com/users/bowxlss')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`GitHub API error: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(userData => {
+            if (userData.created_at && accountAgeEl) {
+                const created = new Date(userData.created_at);
+                const now = new Date();
+                const diffTime = Math.abs(now - created);
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                const years = Math.floor(diffDays / 365);
+                const months = Math.floor((diffDays % 365) / 30);
+                
+                accountAgeEl.textContent = `${years}y ${months}m`;
+            }
+        })
+        .catch(error => {
+            console.error('Error loading GitHub user data:', error);
+            if (accountAgeEl) accountAgeEl.textContent = 'N/A';
+        });
+}
+
+function handleGitHubError(error) {
+    // Handle specific GitHub API errors
+    if (error.message.includes('403')) {
+        showNotification('GitHub API rate limit exceeded. Please try again later.', 'error');
+    } else if (error.message.includes('404')) {
+        showNotification('GitHub user not found.', 'error');
+    } else {
+        showNotification('Failed to load GitHub data. Please check your connection.', 'error');
+    }
+}
+
+// Utility functions
+function formatDate(dateString, short = false) {
+    const date = new Date(dateString);
+    const now = new Date();
+    const diffTime = Math.abs(now - date);
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    
+    if (short) {
+        if (diffDays === 1) return '1 day ago';
+        if (diffDays < 7) return `${diffDays} days ago`;
+        if (diffDays < 30) return `${Math.floor(diffDays / 7)} weeks ago`;
+        return `${Math.floor(diffDays / 30)} months ago`;
+    }
+    
+    return date.toLocaleDateString('en-US', { 
+        year: 'numeric', 
+        month: 'short', 
+        day: 'numeric' 
+    });
+}
+
+function getLanguageColor(language) {
+    const colors = {
+        'JavaScript': '#f1e05a',
+        'Python': '#3572A5',
+        'HTML': '#e34c26',
+        'CSS': '#563d7c',
+        'Java': '#b07219',
+        'TypeScript': '#2b7489',
+        'PHP': '#4F5D95',
+        'C++': '#f34b7d',
+        'C#': '#178600',
+        'Ruby': '#701516',
+        'Go': '#00ADD8',
+        'Rust': '#dea584',
+        'Shell': '#89e051'
+    };
+    
+    return colors[language] || '#6c757d';
+}
+
 // Main initialization
 document.addEventListener("DOMContentLoaded", function(){
     console.log("DOM loaded successfully");
@@ -235,6 +469,9 @@ document.addEventListener("DOMContentLoaded", function(){
     
     // Initialize Skill Animation
     initializeSkillAnimation();
+    
+    // Initialize GitHub API Integration
+    initializeGitHubIntegration();
     
     // Improved Theme Toggle with Smooth Transition & Local Storage
     const themeToggle = document.getElementById('theme-toggle');
