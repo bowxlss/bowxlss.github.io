@@ -1,4 +1,4 @@
-// Logs Updates Integration with Toggle Button
+// Logs Updates Integration with Toggle Button - FIXED VERSION
 class LogsUpdates {
     constructor() {
         this.username = 'bowxlss';
@@ -81,17 +81,29 @@ class LogsUpdates {
                 if (linkHeader) {
                     const totalCommits = this.extractTotalCommits(linkHeader);
                     this.totalCommitsEl.textContent = totalCommits || 0;
+                } else {
+                    // If no Link header, try to count from the first page
+                    const commitsData = await commitsResponse.json();
+                    this.totalCommitsEl.textContent = commitsData.length || 0;
                 }
             }
             
-            // Update last update date
-            if (repoData.updated_at) {
+            // Update last update date - FIXED: Use pushed_at instead of updated_at
+            if (repoData.pushed_at) {
+                const lastUpdate = new Date(repoData.pushed_at);
+                this.lastUpdateEl.textContent = this.formatDate(lastUpdate);
+            } else if (repoData.updated_at) {
                 const lastUpdate = new Date(repoData.updated_at);
                 this.lastUpdateEl.textContent = this.formatDate(lastUpdate);
             }
             
         } catch (error) {
             console.error('Error loading repo stats:', error);
+            // Set fallback values
+            this.totalCommitsEl.textContent = '0';
+            this.lastUpdateEl.textContent = 'Unknown';
+            this.repoStarsEl.textContent = '0';
+            this.repoForksEl.textContent = '0';
         }
     }
     
@@ -118,6 +130,12 @@ class LogsUpdates {
             }
             
             this.renderCommits(commits);
+            
+            // FIXED: Update last update with the most recent commit date
+            if (commits[0] && commits[0].commit && commits[0].commit.author) {
+                const lastCommitDate = new Date(commits[0].commit.author.date);
+                this.lastUpdateEl.textContent = this.formatDate(lastCommitDate);
+            }
             
         } catch (error) {
             console.error('Error loading recent commits:', error);
@@ -160,9 +178,18 @@ class LogsUpdates {
     formatDate(date) {
         const now = new Date();
         const diffTime = Math.abs(now - date);
-        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        const diffMinutes = Math.floor(diffTime / (1000 * 60));
+        const diffHours = Math.floor(diffTime / (1000 * 60 * 60));
+        const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
         
-        if (diffDays === 1) {
+        // FIXED: More accurate date formatting
+        if (diffMinutes < 1) {
+            return 'Just now';
+        } else if (diffMinutes < 60) {
+            return `${diffMinutes} minute${diffMinutes > 1 ? 's' : ''} ago`;
+        } else if (diffHours < 24) {
+            return `${diffHours} hour${diffHours > 1 ? 's' : ''} ago`;
+        } else if (diffDays === 1) {
             return 'Yesterday';
         } else if (diffDays < 7) {
             return `${diffDays} days ago`;
