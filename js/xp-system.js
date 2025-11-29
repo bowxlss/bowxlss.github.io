@@ -1,4 +1,4 @@
-// xp-system.js - XP and achievement system
+// xp-system.js - XP and achievement system (FIXED VERSION)
 
 // XP System State Management - START FROM LEVEL 0 FOR NEW VISITORS
 let xpState = {
@@ -8,6 +8,10 @@ let xpState = {
     actions: {},
     lastReset: null
 };
+
+// Notification queue system to prevent duplicates
+let notificationQueue = [];
+let isShowingNotification = false;
 
 // Load XP state from localStorage
 function loadXPState() {
@@ -53,6 +57,15 @@ function calculateNextLevelXP() {
     return Math.floor(100 * Math.pow(1.5, xpState.level));
 }
 
+// Calculate total XP earned
+function calculateTotalXP() {
+    let total = xpState.currentXP;
+    for (let i = 0; i < xpState.level; i++) {
+        total += Math.floor(100 * Math.pow(1.5, i));
+    }
+    return total;
+}
+
 // Update XP display
 function updateXPDisplay() {
     const xpLevel = document.querySelector('.xp-level');
@@ -71,23 +84,42 @@ function updateXPDisplay() {
     }
 }
 
-// Show notification function
+// FIXED: Improved notification system with queue
 function showNotification(message, type = 'info') {
+    // Add to queue
+    notificationQueue.push({ message, type });
+    
+    // If not already showing a notification, process the queue
+    if (!isShowingNotification) {
+        processNotificationQueue();
+    }
+}
+
+function processNotificationQueue() {
+    if (notificationQueue.length === 0 || isShowingNotification) {
+        return;
+    }
+    
+    isShowingNotification = true;
+    const { message, type } = notificationQueue.shift();
+    
     // Create notification element
     const notification = document.createElement('div');
+    notification.className = 'notification';
     notification.style.cssText = `
         position: fixed;
         top: 20px;
         right: 20px;
         padding: 15px 20px;
-        background: ${type === 'success' ? 'rgba(0,255,0,0.2)' : 'rgba(255,255,0,0.2)'};
-        color: ${type === 'success' ? '#00ff00' : '#ffff00'};
-        border: 1px solid ${type === 'success' ? '#00ff00' : '#ffff00'};
+        background: ${type === 'success' ? 'rgba(46, 204, 113, 0.9)' : 'rgba(241, 196, 15, 0.9)'};
+        color: white;
         border-radius: 8px;
         z-index: 10000;
         font-weight: bold;
-        text-shadow: 0 0 10px ${type === 'success' ? '#00ff00' : '#ffff00'};
-        animation: slideIn 0.3s ease-out;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        animation: slideInRight 0.3s ease-out;
+        max-width: 300px;
+        word-wrap: break-word;
     `;
     
     notification.textContent = message;
@@ -95,11 +127,15 @@ function showNotification(message, type = 'info') {
     
     // Remove after 3 seconds
     setTimeout(() => {
-        notification.style.animation = 'slideOut 0.3s ease-in forwards';
+        notification.style.animation = 'slideOutRight 0.3s ease-in forwards';
         setTimeout(() => {
             if (notification.parentNode) {
                 notification.parentNode.removeChild(notification);
             }
+            isShowingNotification = false;
+            
+            // Process next notification in queue
+            setTimeout(processNotificationQueue, 300);
         }, 300);
     }, 3000);
 }
@@ -110,11 +146,11 @@ function addNotificationStyles() {
         const style = document.createElement('style');
         style.id = 'notification-styles';
         style.textContent = `
-            @keyframes slideIn {
+            @keyframes slideInRight {
                 from { transform: translateX(100%); opacity: 0; }
                 to { transform: translateX(0); opacity: 1; }
             }
-            @keyframes slideOut {
+            @keyframes slideOutRight {
                 from { transform: translateX(0); opacity: 1; }
                 to { transform: translateX(100%); opacity: 0; }
             }
@@ -179,6 +215,11 @@ function gainXP(action, customMessage = null) {
     updateXPDisplay();
     saveXPState();
     
+    // Update leaderboard when user gains XP
+    if (typeof updateLeaderboardOnXP === 'function') {
+        updateLeaderboardOnXP();
+    }
+    
     // Show success notification - ONLY ONE NOTIFICATION
     // Use custom message if provided, otherwise use default
     const notificationMessage = customMessage || `+${points} XP gained for ${action}!`;
@@ -204,6 +245,35 @@ function gainXP(action, customMessage = null) {
     setTimeout(() => {
         isProcessingAction = false;
     }, 1000);
+}
+
+// Enhanced XP gain with floating text and leaderboard integration
+function enhancedGainXP(action, customMessage = null, customPoints = null) {
+    const xpDisplay = document.querySelector('.xp-points');
+    if (xpDisplay) {
+        const rect = xpDisplay.getBoundingClientRect();
+        const points = customPoints || {
+            'visit': 10, 'terminal': 15, 'game': 25, 'social': 30,
+            'achievement': customPoints, 'streak': customPoints
+        }[action];
+        
+        if (points && typeof createFloatingText === 'function') {
+            createFloatingText(`+${points} XP`, rect.left + 50, rect.top - 20, '#00ff00');
+        }
+    }
+    
+    // Check achievements if function exists
+    if (typeof checkAchievements === 'function') {
+        checkAchievements(action);
+    }
+    
+    // Update dashboard if function exists
+    if (typeof updateProgressDashboard === 'function') {
+        updateProgressDashboard();
+    }
+    
+    // Continue with original gainXP
+    gainXP(action, customMessage);
 }
 
 // Auto-gain XP for terminal usage - MODIFIED: No notification for duplicate terminal usage
@@ -395,6 +465,11 @@ function resetXP() {
         localStorage.removeItem('firstVisitXP');
         updateXPDisplay();
         showNotification('XP system has been reset! Starting from Level 0.', 'info');
+        
+        // Update leaderboard after reset
+        if (typeof updateLeaderboardOnXP === 'function') {
+            updateLeaderboardOnXP();
+        }
     }
 }
 
@@ -405,3 +480,18 @@ document.addEventListener('click', function(event) {
         closeModal();
     }
 });
+
+// Export functions for use in other files
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = {
+        xpState,
+        loadXPState,
+        saveXPState,
+        calculateNextLevelXP,
+        calculateTotalXP,
+        updateXPDisplay,
+        gainXP,
+        enhancedGainXP,
+        resetXP
+    };
+}

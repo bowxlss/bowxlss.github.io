@@ -149,6 +149,48 @@
             </div>
         </div>
 
+        <!-- NEW: PROGRESS DASHBOARD SECTION -->
+        <div class="section-box" data-aos="fade-up">
+            <h2><span>📊 Progress Dashboard</span></h2>
+            <div class="progress-dashboard">
+                <div class="dashboard-card">
+                    <h3>📈 Your Progress</h3>
+                    <div class="stats-grid">
+                        <div class="stat">
+                            <span class="stat-value" id="current-level">0</span>
+                            <span class="stat-label">Level</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value" id="total-xp">0</span>
+                            <span class="stat-label">Total XP</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value" id="day-streak">0</span>
+                            <span class="stat-label">Day Streak</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value" id="achievements-count">0</span>
+                            <span class="stat-label">Achievements</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="dashboard-card">
+                    <h3>🎯 Daily Goals</h3>
+                    <div class="goals-list" id="daily-goals">
+                        <!-- Daily goals will be populated by JavaScript -->
+                    </div>
+                </div>
+                
+                <div class="dashboard-card">
+                    <h3>🏆 Recent Achievements</h3>
+                    <div class="achievements-preview" id="achievements-preview">
+                        <!-- Achievements will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Live Stats Counter Section -->
         <div class="section-box" data-aos="fade-up">
             <h2><span>📈 Live Stats</span></h2>
@@ -184,23 +226,31 @@
                     <div class="xp-progress" style="width: 0%;"></div>
                 </div>
                 <div class="xp-actions">
-                    <div class="xp-action" onclick="gainXP('visit')">
+                    <div class="xp-action" onclick="enhancedGainXP('visit')">
                         <strong>🌐 Daily Visit</strong>
                         <div>+10 XP</div>
                     </div>
-                    <div class="xp-action" onclick="gainXP('terminal')">
+                    <div class="xp-action" onclick="enhancedGainXP('terminal')">
                         <strong>💻 Use Terminal</strong>
                         <div>+15 XP</div>
                     </div>
-                    <div class="xp-action" onclick="gainXP('game')">
+                    <div class="xp-action" onclick="enhancedGainXP('game')">
                         <strong>🎮 Play Game</strong>
                         <div>+25 XP</div>
                     </div>
-                    <div class="xp-action" onclick="gainXP('social')">
+                    <div class="xp-action" onclick="enhancedGainXP('social')">
                         <strong>📱 Share Profile</strong>
                         <div>+30 XP</div>
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <!-- NEW: ACHIEVEMENTS SECTION -->
+        <div class="section-box" data-aos="fade-up">
+            <h2><span>🏅 Achievements</span></h2>
+            <div class="achievements-container" id="achievements-container">
+                <!-- Achievements will be populated by JavaScript -->
             </div>
         </div>
 
@@ -314,6 +364,22 @@
             </div>
         </div>
 
+        <!-- NEW: SOCIAL SHARING SECTION -->
+        <div class="section-box" data-aos="fade-up">
+            <h2><span>📢 Share Your Progress</span></h2>
+            <div class="social-buttons">
+                <button onclick="shareProgress()" class="social-btn share-btn">
+                    📢 Share Progress
+                </button>
+                <button onclick="joinCommunity()" class="social-btn community-btn">
+                    👥 Join Community
+                </button>
+                <button onclick="viewLeaderboard()" class="social-btn leaderboard-btn">
+                    🏆 Leaderboard
+                </button>
+            </div>
+        </div>
+
         <!-- Social Media Section -->
         <div class="social-title" data-aos="fade-up"><span>📱 Social Media</span></div>
         <div class="social-container" data-aos="fade-up">
@@ -369,5 +435,8 @@
     <script src="js/terminal.js"></script>
     <script src="js/xp-system.js"></script>
     <script src="js/features.js"></script>
+    <script src="js/achievements.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/leaderboard.js"></script>
 </body>
 </html>
