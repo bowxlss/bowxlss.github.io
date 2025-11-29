@@ -171,4 +171,71 @@ h1{font-size:3em;letter-spacing:3px;color:#3d8cff;text-shadow:0 0 8px #003d7a;fo
     
     /* Optimize particles for mobile - tetap sembunyikan partikel untuk performa */
     #particles-js{display:none}
+
+    /* PERBAIKAN TAMBAHAN: Visitor World Map Stats di Mobile */
+    .visitor-stats {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        margin-top: 15px;
+    }
+    
+    .visitor-stat {
+        padding: 12px 8px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 70px;
+    }
+    
+    .visitor-stat .stat-number {
+        font-size: 1.4em;
+        margin-bottom: 5px;
+        word-break: break-word;
+        line-height: 1.2;
+    }
+    
+    .visitor-stat .stat-label {
+        font-size: 0.75em;
+        text-align: center;
+    }
+
+    /* PERBAIKAN TAMBAHAN: XP System di Mobile */
+    .xp-header {
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+    }
+    
+    .xp-level {
+        font-size: 1.4em;
+        word-break: break-word;
+    }
+    
+    .xp-points {
+        font-size: 1.1em;
+        word-break: break-word;
+    }
+    
+    .xp-actions {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        margin-top: 15px;
+    }
+    
+    .xp-action {
+        padding: 12px;
+        text-align: center;
+    }
+
+    /* PERBAIKAN: Section padding untuk mobile */
+    .section-box {
+        padding: 20px 15px;
+        margin-top: 30px;
+    }
+
+    /* PERBAIKAN: Container padding untuk mobile */
+    .container {
+        padding: 15px;
+    }
 }

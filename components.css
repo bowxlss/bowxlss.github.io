@@ -307,6 +307,8 @@
     padding: 25px;
     margin-top: 30px;
     box-shadow: 0 0 25px var(--glow-color);
+    position: relative;
+    overflow: hidden;
 }
 
 .xp-header {
@@ -314,18 +316,21 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 15px;
+    flex-wrap: wrap;
 }
 
 .xp-level {
     font-size: 1.6em; /* Increased font size */
     color: var(--tag-color);
     text-shadow: 0 0 8px var(--glow-color);
+    word-break: break-word;
 }
 
 .xp-points {
     font-size: 1.3em; /* Increased font size */
     color: #ffd700;
     text-shadow: 0 0 6px #ffd700;
+    word-break: break-word;
 }
 
 .xp-bar {
@@ -379,6 +384,7 @@
     cursor: pointer;
     transition: all 0.3s ease;
     text-align: center;
+    word-break: break-word;
 }
 
 .xp-action:hover {
@@ -642,10 +648,31 @@
 
 .visitor-stat {
     text-align: center;
-    padding: 10px;
+    padding: 12px 8px;
     background: rgba(61,140,255,0.1);
     border-radius: 8px;
     border: 1px solid var(--glow-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 80px;
+}
+
+.visitor-stat .stat-number {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: var(--tag-color);
+    text-shadow: 0 0 8px var(--glow-color);
+    margin-bottom: 5px;
+    word-break: break-word;
+    line-height: 1.2;
+}
+
+.visitor-stat .stat-label {
+    font-size: 0.85em;
+    color: var(--text-color);
+    text-shadow: 0 0 4px var(--glow-color);
 }
 
 /* Live Coding Styles */
@@ -1391,6 +1418,60 @@
     .activity-stat-icon {
         width: auto;
     }
+
+    /* PERBAIKAN TAMBAHAN: Visitor World Map Stats di Mobile */
+    .visitor-stats {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+    
+    .visitor-stat {
+        padding: 12px 8px;
+        min-height: 70px;
+    }
+    
+    .visitor-stat .stat-number {
+        font-size: 1.4em;
+    }
+    
+    .visitor-stat .stat-label {
+        font-size: 0.75em;
+    }
+
+    /* PERBAIKAN TAMBAHAN: XP System di Mobile */
+    .xp-header {
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+    }
+    
+    .xp-level {
+        font-size: 1.4em;
+    }
+    
+    .xp-points {
+        font-size: 1.1em;
+    }
+    
+    .xp-actions {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    
+    .xp-action {
+        padding: 12px;
+    }
+
+    /* PERBAIKAN: Section padding untuk mobile */
+    .section-box {
+        padding: 20px 15px;
+        margin-top: 30px;
+    }
+
+    /* PERBAIKAN: Container padding untuk mobile */
+    .container {
+        padding: 15px;
+    }
 }
 
     /* Leaderboard Styles */
@@ -2072,7 +2153,7 @@
 }
 
 /* Mobile responsive for logs updates */
-@media (max-width: 600px) {}
+@media (max-width: 600px) {
     .logs-stats {
         grid-template-columns: repeat(2, 1fr);
         gap: 10px;
