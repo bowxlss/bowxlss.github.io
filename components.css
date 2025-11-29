@@ -43,8 +43,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 30px;
-    max-width: 800px;
+    gap: 50px; /* Increased gap for more space */
+    max-width: 1200px; /* Increased max-width */
     margin: 0 auto;
 }
 
@@ -55,8 +55,8 @@
 }
 
 .anime-img {
-    width: 140px;
-    height: 140px;
+    width: 180px; /* Increased size */
+    height: 180px; /* Increased size */
     border-radius: 50%;
     box-shadow: 0 0 15px #002d5c, 0 0 30px var(--glow-color);
     animation: neonGlow 2.5s infinite alternate;
@@ -69,7 +69,7 @@
 }
 
 .name-title {
-    font-size: 2.8em;
+    font-size: 3.5em; /* Increased font size */
     letter-spacing: 3px;
     color: #3d8cff;
     text-shadow: 0 0 8px #003d7a;
@@ -83,7 +83,7 @@
 }
 
 .time-greeting h2 {
-    font-size: 1.6em;
+    font-size: 1.8em; /* Increased font size */
     color: var(--tag-color);
     text-shadow: 0 0 12px var(--glow-color);
     margin-bottom: 8px;
@@ -91,7 +91,7 @@
 }
 
 .time-greeting p {
-    font-size: 1.1em;
+    font-size: 1.2em; /* Increased font size */
     color: var(--text-color);
     text-shadow: 0 0 6px var(--glow-color);
     font-style: italic;
@@ -113,14 +113,14 @@
 /* Favorites Section */
 .favorites-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Increased minmax */
+    gap: 30px; /* Increased gap */
     margin-top: 20px;
 }
 
 .favorite-category {
     background: rgba(10,20,40,.5);
-    padding: 15px;
+    padding: 20px; /* Increased padding */
     border-radius: 8px;
     text-align: center;
 }
@@ -128,7 +128,7 @@
 .favorite-category h3 {
     color: var(--tag-color);
     margin-bottom: 10px;
-    font-size: 1.2em;
+    font-size: 1.3em; /* Increased font size */
 }
 
 .favorite-category ul {
@@ -151,14 +151,14 @@
 /* Live Stats Styles */
 .stats-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Increased minmax */
+    gap: 25px; /* Increased gap */
     margin-top: 20px;
 }
 
 .stat {
     text-align: center;
-    padding: 20px;
+    padding: 25px; /* Increased padding */
     background: rgba(10, 20, 40, 0.5);
     border-radius: 10px;
     border: 1px solid rgba(61, 140, 255, 0.3);
@@ -171,7 +171,7 @@
 }
 
 .stat-number {
-    font-size: 2.5em;
+    font-size: 3em; /* Increased font size */
     font-weight: bold;
     color: var(--tag-color);
     text-shadow: 0 0 10px var(--glow-color);
@@ -179,7 +179,7 @@
 }
 
 .stat-label {
-    font-size: 0.9em;
+    font-size: 1em; /* Increased font size */
     color: var(--text-color);
     text-shadow: 0 0 4px var(--glow-color);
 }
@@ -192,7 +192,7 @@
     overflow: hidden;
     box-shadow: 0 0 20px var(--glow-color);
     font-family: 'Courier New', monospace;
-    max-width: 800px;
+    max-width: 1000px; /* Increased max-width */
     margin: 0 auto;
 }
 
@@ -228,7 +228,7 @@
 
 .terminal-body {
     padding: 15px;
-    height: 300px;
+    height: 350px; /* Increased height */
     overflow-y: auto;
     background: rgba(0, 0, 0, 0.3);
 }
@@ -317,20 +317,20 @@
 }
 
 .xp-level {
-    font-size: 1.4em;
+    font-size: 1.6em; /* Increased font size */
     color: var(--tag-color);
     text-shadow: 0 0 8px var(--glow-color);
 }
 
 .xp-points {
-    font-size: 1.1em;
+    font-size: 1.3em; /* Increased font size */
     color: #ffd700;
     text-shadow: 0 0 6px #ffd700;
 }
 
 .xp-bar {
     width: 100%;
-    height: 20px;
+    height: 25px; /* Increased height */
     background: rgba(10,20,40,0.7);
     border-radius: 10px;
     overflow: hidden;
@@ -366,8 +366,8 @@
 
 .xp-actions {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 15px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Increased minmax */
+    gap: 20px; /* Increased gap */
     margin-top: 20px;
 }
 
@@ -375,7 +375,7 @@
     background: rgba(61,140,255,0.1);
     border: 1px solid var(--glow-color);
     border-radius: 8px;
-    padding: 12px;
+    padding: 15px; /* Increased padding */
     cursor: pointer;
     transition: all 0.3s ease;
     text-align: center;
@@ -395,8 +395,8 @@
 /* NEW: Progress Dashboard Styles */
 .progress-dashboard {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Increased minmax */
+    gap: 25px; /* Increased gap */
     margin-top: 20px;
 }
 
@@ -404,14 +404,14 @@
     background: rgba(10, 20, 40, 0.7);
     border: 1px solid var(--glow-color);
     border-radius: 10px;
-    padding: 20px;
+    padding: 25px; /* Increased padding */
     box-shadow: 0 0 15px rgba(0, 136, 255, 0.3);
 }
 
 .dashboard-card h3 {
     color: var(--tag-color);
     margin-bottom: 15px;
-    font-size: 1.2em;
+    font-size: 1.3em; /* Increased font size */
     text-align: center;
     text-shadow: 0 0 8px var(--glow-color);
 }
@@ -490,8 +490,8 @@
 /* NEW: Achievements Container */
 .achievements-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 15px;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Increased minmax */
+    gap: 20px; /* Increased gap */
     margin-top: 20px;
 }
 
@@ -499,7 +499,7 @@
     background: rgba(10, 20, 40, 0.7);
     border: 1px solid var(--glow-color);
     border-radius: 10px;
-    padding: 15px;
+    padding: 20px; /* Increased padding */
     display: flex;
     align-items: center;
     gap: 15px;
@@ -518,8 +518,8 @@
 }
 
 .achievement-icon-large {
-    font-size: 2em;
-    width: 50px;
+    font-size: 2.5em; /* Increased font size */
+    width: 60px; /* Increased width */
     text-align: center;
 }
 
@@ -530,13 +530,13 @@
 .achievement-content h4 {
     margin: 0 0 5px 0;
     color: var(--tag-color);
-    font-size: 1.1em;
+    font-size: 1.2em; /* Increased font size */
 }
 
 .achievement-content p {
     margin: 0;
     color: var(--text-color);
-    font-size: 0.9em;
+    font-size: 1em; /* Increased font size */
     opacity: 0.9;
 }
 
@@ -610,7 +610,7 @@
 }
 
 .map-container {
-    height: 200px;
+    height: 250px; /* Increased height */
     background: rgba(5,10,21,0.8);
     border-radius: 10px;
     border: 1px solid var(--glow-color);

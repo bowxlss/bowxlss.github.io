@@ -17,8 +17,11 @@ h1{font-size:3em;letter-spacing:3px;color:#3d8cff;text-shadow:0 0 8px #003d7a;fo
 .tags-container{margin-top:20px;display:flex;flex-wrap:wrap;justify-content:flex-start;gap:10px}
 .tag{padding:6px 14px;border-radius:20px;background:var(--tag-bg);color:var(--tag-color);font-weight:700;font-size:.9em;text-shadow:0 0 4px var(--glow-color);transition:transform var(--animation-duration),box-shadow var(--animation-duration)}
 .tag:hover{transform:scale(1.1);box-shadow:0 0 8px var(--glow-color)}
-.container{max-width:800px;margin:auto;padding:20px;font-size:1.1em}
-.section-box{margin-top:40px;padding:20px;background:var(--section-bg);border-radius:10px;box-shadow:0 0 15px var(--box-shadow-color);color:var(--text-color);text-shadow:0 0 4px var(--glow-color),0 0 8px var(--glow-color);transition:transform var(--animation-duration),box-shadow var(--animation-duration)}
+
+/* UPDATED: Container untuk lebar yang lebih besar */
+.container{max-width:1200px;margin:auto;padding:20px;font-size:1.1em}
+
+.section-box{margin-top:40px;padding:25px;background:var(--section-bg);border-radius:10px;box-shadow:0 0 15px var(--box-shadow-color);color:var(--text-color);text-shadow:0 0 4px var(--glow-color),0 0 8px var(--glow-color);transition:transform var(--animation-duration),box-shadow var(--animation-duration)}
 .section-box:hover{transform:translateY(-4px);box-shadow:0 0 20px var(--glow-color)}
 .section-box h2{font-size:2em;margin-bottom:15px}
 .section-box h2 span{display:inline-block;animation:floatEmoji 2s infinite alternate}
@@ -51,7 +54,7 @@ h1{font-size:3em;letter-spacing:3px;color:#3d8cff;text-shadow:0 0 8px #003d7a;fo
 ::-webkit-scrollbar-thumb:hover{background:#ff99ff}
 
 /* Second Page Specific Styles */
-.project-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:20px}
+.project-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:20px}
 .project-item{background:rgba(10,20,40,.7);border-radius:10px;box-shadow:0 0 12px var(--glow-color);overflow:hidden;transition:var(--animation-duration);text-align:left}
 .project-item:hover{transform:scale(1.03);box-shadow:0 0 20px var(--glow-color)}
 .project-item img{width:100%;height:140px;object-fit:cover}
