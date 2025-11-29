@@ -1291,7 +1291,7 @@
 }
 
 /* Mobile responsive for leaderboard */
-@media (max-width: 600px) {
+@media (max-width: 600px) {}
     .top-players {
         flex-direction: column;
         align-items: center;
