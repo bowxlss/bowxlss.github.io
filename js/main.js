@@ -160,6 +160,31 @@ function animateCounterElement(elementId, target) {
     }, 50);
 }
 
+// Skill Progress Animation on Scroll
+function initializeSkillAnimation() {
+    const skillElements = document.querySelectorAll('.skill');
+    
+    if (skillElements.length === 0) return;
+    
+    const skillObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.classList.add('skill-animated');
+                }, 200);
+                skillObserver.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.3,
+        rootMargin: '0px 0px -50px 0px'
+    });
+    
+    skillElements.forEach(skill => {
+        skillObserver.observe(skill);
+    });
+}
+
 // Main initialization
 document.addEventListener("DOMContentLoaded", function(){
     console.log("DOM loaded successfully");
@@ -207,6 +232,9 @@ document.addEventListener("DOMContentLoaded", function(){
     if (typeof TerminalGame === 'function') {
         window.terminalGame = new TerminalGame();
     }
+    
+    // Initialize Skill Animation
+    initializeSkillAnimation();
     
     // Improved Theme Toggle with Smooth Transition & Local Storage
     const themeToggle = document.getElementById('theme-toggle');

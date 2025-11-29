@@ -749,6 +749,26 @@
     border: 1px solid #ff6b6b;
 }
 
+/* Enhanced Skill Animations */
+.skill {
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: all 0.6s ease;
+}
+
+.skill-animated {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Staggered animation for skills */
+.skill:nth-child(1) { transition-delay: 0.1s; }
+.skill:nth-child(2) { transition-delay: 0.2s; }
+.skill:nth-child(3) { transition-delay: 0.3s; }
+.skill:nth-child(4) { transition-delay: 0.4s; }
+.skill:nth-child(5) { transition-delay: 0.5s; }
+.skill:nth-child(6) { transition-delay: 0.6s; }
+
 /* Mobile responsive for new layout */
 @media (max-width: 600px) {
     .typing-container {

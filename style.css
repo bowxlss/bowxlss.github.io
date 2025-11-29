@@ -63,8 +63,8 @@ h1{font-size:3em;letter-spacing:3px;color:#3d8cff;text-shadow:0 0 8px #003d7a;fo
 .skill-name{font-weight:700;color:#3d8cff;text-shadow:0 0 4px #0088ff}
 .skill-percent{font-weight:700;color:#3d8cff;text-shadow:0 0 4px #0088ff}
 .skill-bar{width:100%;height:18px;background:rgba(10,20,40,.65);border-radius:12px;overflow:hidden;box-shadow:0 0 4px #0088ff inset;border:1px solid rgba(61,140,255,.4)}
-.skill-fill{height:100%;background:linear-gradient(90deg,#0088ff,#3d8cff);width:0;border-radius:12px;box-shadow:0 0 8px #0088ff;animation: fillSkill 1.5s forwards}
-@keyframes fillSkill{from {width:0;} to {width:var(--skill-width);}}
+.skill-fill{height:100%;background:linear-gradient(90deg,#0088ff,#3d8cff);width:0;border-radius:12px;box-shadow:0 0 8px #0088ff;transition:width 1.5s ease-in-out}
+.skill-animated .skill-fill{width:var(--skill-width)}
 .project-list{overflow:visible !important;}
 
 /* NEW: Loading Animation */
@@ -80,6 +80,33 @@ h1{font-size:3em;letter-spacing:3px;color:#3d8cff;text-shadow:0 0 8px #003d7a;fo
 /* NEW: Back to Top Button */
 .back-to-top-btn{position:fixed;bottom:20px;right:20px;padding:12px 15px;background:var(--section-bg);color:var(--text-color);border:none;border-radius:50%;cursor:pointer;display:none;z-index:99;transition:all 0.3s ease;box-shadow:0 0 10px var(--glow-color);font-size:1.2em}
 .back-to-top-btn:hover{transform:scale(1.1);box-shadow:0 0 15px var(--glow-color)}
+
+/* NEW: Skill Progress Animation on Scroll */
+.skill-bar {
+    position: relative;
+    overflow: hidden;
+}
+
+.skill-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    animation: shimmer 2s infinite;
+    opacity: 0;
+}
+
+.skill-animated .skill-bar::after {
+    opacity: 1;
+}
+
+@keyframes shimmer {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
 
 /* Mobile optimization untuk terminal */
 @media (max-width: 600px) {

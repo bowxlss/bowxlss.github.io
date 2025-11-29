@@ -123,8 +123,17 @@ function addNotificationStyles() {
     }
 }
 
-// FIXED XP System Functionality - UPDATED FOR LEVEL 0 START
-function gainXP(action) {
+// FIXED: XP System Functionality - Fixed double notification issue
+let isProcessingAction = false;
+
+function gainXP(action, customMessage = null) {
+    // Prevent multiple simultaneous executions
+    if (isProcessingAction) {
+        return;
+    }
+    
+    isProcessingAction = true;
+
     const xpValues = {
         'visit': 10,
         'terminal': 15,
@@ -135,13 +144,20 @@ function gainXP(action) {
     const points = xpValues[action];
     if (!points) {
         showNotification('Invalid action!', 'info');
+        isProcessingAction = false;
         return;
     }
 
-    // Check if action was already performed today
+    // Check if action was already performed today - FIXED LOGIC
     const today = new Date().toDateString();
+    
+    // Check if this action was already done today
     if (xpState.actions[action] === today) {
-        showNotification(`You already earned XP for ${action} today! Come back tomorrow.`, 'info');
+        // Only show notification for manual actions, not for terminal usage
+        if (action !== 'terminal') {
+            showNotification(`You already earned XP for ${action} today! Come back tomorrow.`, 'info');
+        }
+        isProcessingAction = false;
         return;
     }
 
@@ -163,8 +179,10 @@ function gainXP(action) {
     updateXPDisplay();
     saveXPState();
     
-    // Show notifications
-    showNotification(`+${points} XP gained for ${action}!`, 'success');
+    // Show success notification - ONLY ONE NOTIFICATION
+    // Use custom message if provided, otherwise use default
+    const notificationMessage = customMessage || `+${points} XP gained for ${action}!`;
+    showNotification(notificationMessage, 'success');
     
     if (levelUps > 0) {
         setTimeout(() => {
@@ -181,9 +199,14 @@ function gainXP(action) {
             xpProgress.style.transition = 'width 2s ease-in-out';
         }, 500);
     }
+
+    // Reset processing flag after a short delay to prevent rapid successive clicks
+    setTimeout(() => {
+        isProcessingAction = false;
+    }, 1000);
 }
 
-// Auto-gain XP for terminal usage
+// Auto-gain XP for terminal usage - MODIFIED: No notification for duplicate terminal usage
 function setupXPTracking() {
     if (typeof TerminalGame === 'undefined') return;
     
@@ -193,7 +216,13 @@ function setupXPTracking() {
         
         // Award XP for terminal usage (excluding help and clear commands)
         if (cmd.trim() && !cmd.includes('help') && !cmd.includes('clear')) {
-            setTimeout(() => gainXP('terminal'), 100);
+            setTimeout(() => {
+                const today = new Date().toDateString();
+                // Only award XP if terminal hasn't been used today
+                if (xpState.actions['terminal'] !== today) {
+                    gainXP('terminal');
+                }
+            }, 100);
         }
         
         return result;
@@ -248,10 +277,15 @@ function addConfettiStyles() {
     }
 }
 
-// Event Functions
+// FIXED: Event Functions - No more double notification
 function joinEvent(event) {
-    showNotification(`Joined ${event} event! 🎉`, 'success');
-    gainXP('game');
+    // Use custom message to combine both notifications into one
+    const eventMessages = {
+        'halloween': '🎃 Joined Halloween event! +25 XP gained!',
+        'christmas': '🎄 Joined Christmas event! +25 XP gained!'
+    };
+    
+    gainXP('game', eventMessages[event] || `Joined ${event} event! +25 XP gained!`);
 }
 
 function viewChallenges(event) {
@@ -342,8 +376,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (firstVisit) {
         localStorage.setItem('firstVisitXP', 'true');
         setTimeout(() => {
-            gainXP('visit');
-            showNotification('🎊 Welcome! +10 XP for your first visit!', 'success');
+            gainXP('visit', '🎊 Welcome! +10 XP for your first visit!');
         }, 2000);
     }
 });
